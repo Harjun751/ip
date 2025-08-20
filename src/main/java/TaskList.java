@@ -14,7 +14,7 @@ public class TaskList {
      * @throws IllegalStateException If attempt to insert
      *                               task into a full list
      */
-    public void addToList(Todo task) {
+    public void addToList(Task task) {
         if (count > SIZE) {
             throw new IllegalStateException("Array is full");
         }
@@ -36,6 +36,10 @@ public class TaskList {
         }
         this.list[index].setDone(done);
         return this.list[index].toString();
+    }
+
+    public int getCount() {
+        return this.count;
     }
 
     @Override

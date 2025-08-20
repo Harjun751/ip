@@ -35,6 +35,34 @@ public class Marvin {
                 case "list":
                     printTaskList();
                     break;
+                case "deadline":
+                    try {
+                        // pass the rest of the line into the parser
+                        Deadline d = Parser.parseDeadline(scan.nextLine());
+                        addToListAndPrint(d);
+                    } catch (Exception ignored) {
+                        System.out.println(MARVIN_HEADER);
+                        System.out.println(boxify(
+                        "Sigh. Follow the format deadline [name] /by [time]\nNot like it matters, anyway."
+                        ));
+                    }
+                    break;
+                case "event":
+                    try {
+                        // pass the rest of the line into the parser
+                        Event e = Parser.parseEvent(scan.nextLine());
+                        addToListAndPrint(e);
+                    } catch (Exception ignored) {
+                        System.out.println(MARVIN_HEADER);
+                        System.out.println(boxify(
+                        "Sigh. Follow the format event [name] /from [time] /to [time]\n Or don't, whatever."
+                        ));
+                    }
+                    break;
+                case "todo":
+                    Todo t = new Todo(scan.nextLine().trim());
+                    addToListAndPrint(t);
+                    break;
                 case "mark":
                 case "unmark":
                     try {
@@ -43,21 +71,18 @@ public class Marvin {
                         String marked = taskList.markTask(index - 1, command.equals("mark"));
                         System.out.println(MARVIN_HEADER);
                         System.out.println(boxify("Fine, done.\n" + marked));
-                        break;
                     } catch (ArrayIndexOutOfBoundsException e) {
                         System.out.println(MARVIN_HEADER);
                         System.out.println(boxify("That task doesn't exist. Just like " + getColoredTextString("hope", Color.RED) + "."));
-                        break;
                     } catch (InputMismatchException ignored) {
-                        // let case fall through to default - assume user wants to add
-                        // a task with a name starting with "mark" or "unmark"
-                        // Add a space due to the failed nextInt()
-                        // to preserve task name
-                        command += " ";
+                        // let case fall through to default
+                        System.out.println(MARVIN_HEADER);
+                        System.out.println(boxify("You need a number to mark/unmark. Sigh."));
                     }
+                    break;
                 default:
-                    command += scan.nextLine();
-                    addToListAndPrint(command);
+                    System.out.println(MARVIN_HEADER);
+                    System.out.println(boxify("I don’t recognize that command. Not that it would have mattered if I did."));
             }
         }
         System.out.println(MARVIN_HEADER);
@@ -88,9 +113,9 @@ public class Marvin {
         return boxify(getRandomItemFromArray(goodbyes));
     }
 
-    private static void addToListAndPrint(String task) {
+    private static void addToListAndPrint(Task task) {
         // Add task to the endless list of fun
-        taskList.addToList(new Todo(task));
+        taskList.addToList(task);
         // Print out a witty reply
         String[] addedText = {
                 "Fine. I’ve added ‘%s’ to your endless list of pointless chores.\nNot that it will make the slightest difference to the universe—or me.",
@@ -98,7 +123,8 @@ public class Marvin {
                 "There. ‘%s’ has been added. You may pretend it matters."
         };
         String textWithTask = getRandomItemFromArray(addedText);
-        textWithTask = String.format(textWithTask, getColoredTextString(task, Color.YELLOW));
+        textWithTask = String.format(textWithTask, getColoredTextString(task.getDescription(), Color.YELLOW));
+        textWithTask += "\nYou have " + taskList.getCount() + " task(s) in the list.";
         System.out.println(MARVIN_HEADER);
         System.out.println(boxify(textWithTask));
     }

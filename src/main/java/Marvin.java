@@ -27,7 +27,7 @@ public class Marvin {
             System.out.println(USER_HEADER);
             System.out.print("↳");
             Scanner scan = new Scanner(System.in);
-            String command = scan.next();
+            String command = scan.nextLine();
             switch (command) {
                 case "bye":
                     break loop;
@@ -42,6 +42,8 @@ public class Marvin {
         System.out.println(getGoodbye());
         System.out.println(DEMARCATOR);
     }
+
+    // Functions available to Marvin
 
     private static String getGreeting() {
         String[] greetings = {
@@ -97,6 +99,8 @@ public class Marvin {
         System.out.println(boxify(sb.toString()));
     }
 
+    // Helper functions for terminal display
+
     private static String getColoredTextString(String text, Color color) {
         return color.sequence + text + "\u001B[0m";
     }
@@ -117,6 +121,7 @@ public class Marvin {
         }
         return String.join("\n", lines);
     }
+
     private static <T> T getRandomItemFromArray(T[] arr) {
         return arr[new Random().nextInt(arr.length)];
     }

@@ -1,7 +1,54 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+---[31mMarvin[0m says------------------------------------------------------------------
+| Yes, [31mMarvin[0m again.                                                           |
+| What’s next? Another grain of sand on the endless beach of [31mpointlessness[0m?    |
+---[33mUser[0m replies-----------------------------------------------------------------
+↳---[31mMarvin[0m says------------------------------------------------------------------
+| Sigh. Follow the format todo [name].                                         |
+---[33mUser[0m replies-----------------------------------------------------------------
+↳---[31mMarvin[0m says------------------------------------------------------------------
+| Fine. I’ve added ‘[33mthis is a new task[0m’ to your endless list of pointless chores. |
+| Not that it will make the slightest difference to the universe—or me.        |
+| You have 1 task(s) in the list.                                              |
+---[33mUser[0m replies-----------------------------------------------------------------
+↳---[31mMarvin[0m says------------------------------------------------------------------
+| Sigh. Follow the format deadline [name] /by [time]                           |
+| Not like it matters, anyway.                                                 |
+---[33mUser[0m replies-----------------------------------------------------------------
+↳---[31mMarvin[0m says------------------------------------------------------------------
+| Fine. I’ve added ‘[33mgoodformat[0m’ to your endless list of pointless chores.      |
+| Not that it will make the slightest difference to the universe—or me.        |
+| You have 2 task(s) in the list.                                              |
+---[33mUser[0m replies-----------------------------------------------------------------
+↳---[31mMarvin[0m says------------------------------------------------------------------
+| Sigh. Follow the format event [name] /from [time] /to [time]                 |
+| Or don't, whatever.                                                          |
+---[33mUser[0m replies-----------------------------------------------------------------
+↳---[31mMarvin[0m says------------------------------------------------------------------
+| Fine. I’ve added ‘[33mgoodformatevent[0m’ to your endless list of pointless chores. |
+| Not that it will make the slightest difference to the universe—or me.        |
+| You have 3 task(s) in the list.                                              |
+---[33mUser[0m replies-----------------------------------------------------------------
+↳---[31mMarvin[0m says------------------------------------------------------------------
+| That task doesn't exist. Just like [31mhope[0m.                                     |
+---[33mUser[0m replies-----------------------------------------------------------------
+↳---[31mMarvin[0m says------------------------------------------------------------------
+| Fine, done.                                                                  |
+| [T][ ] this is a new task                                                    |
+---[33mUser[0m replies-----------------------------------------------------------------
+↳---[31mMarvin[0m says------------------------------------------------------------------
+| That task doesn't exist. Just like [31mhope[0m.                                     |
+---[33mUser[0m replies-----------------------------------------------------------------
+↳---[31mMarvin[0m says------------------------------------------------------------------
+| Fine, done.                                                                  |
+| [T][X] this is a new task                                                    |
+---[33mUser[0m replies-----------------------------------------------------------------
+↳---[31mMarvin[0m says------------------------------------------------------------------
+| Here's your list of chores.                                                  |
+| Another tiny monument to [31mfutility[0m, carefully recorded by me.                 |
+| 1. [T][X] this is a new task                                                 |
+| 2. [D][ ] goodformat (by: 2pm)                                               |
+| 3. [E][ ] goodformatevent (from: 3pm to: 4pm)                                |
+---[33mUser[0m replies-----------------------------------------------------------------
+↳---[31mMarvin[0m says------------------------------------------------------------------
+| Goodbye. Another fleeting moment lost to eternity.                           |
+--------------------------------------------------------------------------------

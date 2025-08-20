@@ -1,0 +1,12 @@
+todo
+todo this is a new task
+deadline badformat /from 12
+deadline goodformat /by 2pm
+event badformat /by 2pm /to 3pm
+event goodformatevent /from 3pm /to 4pm
+unmark 14
+unmark 1
+mark 12
+mark 1
+list
+bye

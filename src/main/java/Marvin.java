@@ -6,6 +6,8 @@ public class Marvin {
     private final static String DEMARCATOR =  new String(new char[WIDTH]).replace("\0", "-");
     private final static String  MARVIN_HEADER =  "---" + getColoredTextString("Marvin", Color.RED) + " says" + new String(new char[WIDTH - 14]).replace("\0", "-");
     private final static String  USER_HEADER =  "---" + getColoredTextString("User", Color.YELLOW) + " replies" + new String(new char[WIDTH - 15]).replace("\0", "-");
+    private static String[] taskList = new String[100];
+    private static int taskCount = 0;
 
     enum Color {
         RED("\u001B[31m"),
@@ -30,8 +32,7 @@ public class Marvin {
                 case "bye":
                     break loop;
                 default:
-                    System.out.println(MARVIN_HEADER);
-                    System.out.println(boxify(command));
+                    addToListAndPrint(command);
             }
         }
         System.out.println(MARVIN_HEADER);
@@ -58,6 +59,21 @@ public class Marvin {
                 "Farewell. Don’t forget to feel mildly guilty for bothering me."
         };
         return boxify(goodbyes[new Random().nextInt(goodbyes.length)]);
+    }
+
+    private static void addToListAndPrint(String task) {
+        // Add task to the endless list of fun
+        taskList[taskCount++] = task;
+        // Print out a witty reply
+        String[] addedText = {
+                "Fine. I’ve added ‘%s’ to your endless list of pointless chores.\nNot that it will make the slightest difference to the universe—or me.",
+                "I’ve logged ‘%s’.\nAnother futile act in an uncaring universe.",
+                "There. ‘%s’ has been added. You may pretend it matters."
+        };
+        String textWithTask = addedText[new Random().nextInt(addedText.length)];
+        textWithTask = String.format(textWithTask, getColoredTextString(task, Color.YELLOW));
+        System.out.println(MARVIN_HEADER);
+        System.out.println(boxify(textWithTask));
     }
 
     private static String getColoredTextString(String text, Color color) {

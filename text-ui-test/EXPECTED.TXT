@@ -50,5 +50,20 @@
 | 3. [E][ ] goodformatevent (from: 3pm to: 4pm)                                |
 ---[33mUser[0m replies-----------------------------------------------------------------
 ↳---[31mMarvin[0m says------------------------------------------------------------------
+| I've removed the task.                                                       |
+| [D][ ] goodformat (by: 2pm)                                                  |
+| Now you have 2 tasks and absolutely nothing will change.                     |
+---[33mUser[0m replies-----------------------------------------------------------------
+↳---[31mMarvin[0m says------------------------------------------------------------------
+| Fine, done.                                                                  |
+| [E][X] goodformatevent (from: 3pm to: 4pm)                                   |
+---[33mUser[0m replies-----------------------------------------------------------------
+↳---[31mMarvin[0m says------------------------------------------------------------------
+| Here's your list of chores.                                                  |
+| Another tiny monument to [31mfutility[0m, carefully recorded by me.                 |
+| 1. [T][X] this is a new task                                                 |
+| 2. [E][X] goodformatevent (from: 3pm to: 4pm)                                |
+---[33mUser[0m replies-----------------------------------------------------------------
+↳---[31mMarvin[0m says------------------------------------------------------------------
 | Goodbye. Another fleeting moment lost to eternity.                           |
 --------------------------------------------------------------------------------

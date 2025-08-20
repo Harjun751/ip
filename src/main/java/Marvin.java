@@ -7,7 +7,7 @@ public class Marvin {
     private final static String DEMARCATOR =  new String(new char[WIDTH]).replace("\0", "-");
     private final static String  MARVIN_HEADER =  "---" + getColoredTextString("Marvin", Color.RED) + " says" + new String(new char[WIDTH - 14]).replace("\0", "-");
     private final static String  USER_HEADER =  "---" + getColoredTextString("User", Color.YELLOW) + " replies" + new String(new char[WIDTH - 15]).replace("\0", "-");
-    private static final TaskList taskList = new TaskList(100);
+    private static final TaskList taskList = new TaskList();
     private static int taskCount = 0;
 
     enum Color {

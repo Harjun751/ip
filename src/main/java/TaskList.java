@@ -1,24 +1,20 @@
+import java.util.ArrayList;
+
 public class TaskList {
-    private final int SIZE;
-    private final Task[] list;
+    private final ArrayList<Task> list;
     private int count = 0;
 
-    public TaskList(int size) {
-        SIZE = size;
-        this.list = new Task[SIZE];
+    public TaskList() {
+        this.list = new ArrayList<Task>();
     }
 
     /**
      * Adds a Todo object to the TodoList.
      * @param task a Todo object representing the task to be added
-     * @throws IllegalStateException If attempt to insert
-     *                               task into a full list
      */
     public void addToList(Task task) {
-        if (count > SIZE) {
-            throw new IllegalStateException("Array is full");
-        }
-        this.list[count++] = task;
+        this.list.add(task);
+        count++;
     }
 
     /**
@@ -31,11 +27,12 @@ public class TaskList {
     public String markTask(int index, boolean done) {
         // Throw error if index supplied is bigger than size
         // or bigger than the current count
-        if (index > SIZE - 1 || index >= count) {
+        if (index >= count || index < 0) {
             throw new ArrayIndexOutOfBoundsException("Invalid index");
         }
-        this.list[index].setDone(done);
-        return this.list[index].toString();
+        Task task = this.list.get(index);
+        task.setDone(done);
+        return task.toString();
     }
 
     public int getCount() {
@@ -48,7 +45,7 @@ public class TaskList {
         for (int i = 0; i < count; i++) {
             sb.append(i+1);
             sb.append(". ");
-            sb.append(this.list[i]);
+            sb.append(this.list.get(i));
             sb.append("\n");
         }
         return sb.toString();

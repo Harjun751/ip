@@ -24,10 +24,10 @@ public class Marvin {
     public static void main(String[] args) {
         System.out.println(MARVIN_HEADER);
         System.out.println(getGreeting());
-        loop: while (true) {
-            System.out.println(USER_HEADER);
-            System.out.print("↳");
-            Scanner scan = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
+        System.out.println(USER_HEADER);
+        System.out.print("↳");
+        loop: while(scan.hasNext()) {
             String command = scan.next();
             switch (command) {
                 case "bye":
@@ -60,8 +60,16 @@ public class Marvin {
                     }
                     break;
                 case "todo":
-                    Todo t = new Todo(scan.nextLine().trim());
-                    addToListAndPrint(t);
+                    String input = scan.nextLine().trim();
+                    if (input == ""){
+                        System.out.println(MARVIN_HEADER);
+                        System.out.println(boxify(
+                                "Sigh. Follow the format todo [name]."
+                        ));
+                    } else {
+                        Todo t = new Todo(input);
+                        addToListAndPrint(t);
+                    }
                     break;
                 case "mark":
                 case "unmark":
@@ -84,7 +92,9 @@ public class Marvin {
                     System.out.println(MARVIN_HEADER);
                     System.out.println(boxify("I don’t recognize that command. Not that it would have mattered if I did."));
             }
-        }
+            System.out.println(USER_HEADER);
+            System.out.print("↳");
+        };
         System.out.println(MARVIN_HEADER);
         System.out.println(getGoodbye());
         System.out.println(DEMARCATOR);
@@ -166,6 +176,6 @@ public class Marvin {
     }
 
     private static <T> T getRandomItemFromArray(T[] arr) {
-        return arr[new Random().nextInt(arr.length)];
+        return arr[new Random(1).nextInt(arr.length)];
     }
 }

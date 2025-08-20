@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -27,14 +28,35 @@ public class Marvin {
             System.out.println(USER_HEADER);
             System.out.print("↳");
             Scanner scan = new Scanner(System.in);
-            String command = scan.nextLine();
+            String command = scan.next();
             switch (command) {
                 case "bye":
                     break loop;
                 case "list":
                     printTaskList();
                     break;
+                case "mark":
+                case "unmark":
+                    try {
+                        int index = scan.nextInt();
+                        // mark tasked based on command input
+                        String marked = taskList.markTask(index - 1, command.equals("mark"));
+                        System.out.println(MARVIN_HEADER);
+                        System.out.println(boxify("Fine, done.\n" + marked));
+                        break;
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println(MARVIN_HEADER);
+                        System.out.println(boxify("That task doesn't exist. Just like " + getColoredTextString("hope", Color.RED) + "."));
+                        break;
+                    } catch (InputMismatchException ignored) {
+                        // let case fall through to default - assume user wants to add
+                        // a task with a name starting with "mark" or "unmark"
+                        // Add a space due to the failed nextInt()
+                        // to preserve task name
+                        command += " ";
+                    }
                 default:
+                    command += scan.nextLine();
                     addToListAndPrint(command);
             }
         }

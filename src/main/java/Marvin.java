@@ -31,6 +31,9 @@ public class Marvin {
             switch (command) {
                 case "bye":
                     break loop;
+                case "list":
+                    printTaskList();
+                    break;
                 default:
                     addToListAndPrint(command);
             }
@@ -48,7 +51,7 @@ public class Marvin {
                 "Yes, I’m " + getColoredTextString("Marvin", Color.RED) +".\nWhat task will I " + getColoredTextString("inevitably", Color.RED) + " remind you about, only for you to ignore?"
         };
         // Return a random greeting
-        return boxify(greetings[new Random().nextInt(greetings.length)]);
+        return boxify(getRandomItemFromArray(greetings));
     }
 
     private static String getGoodbye() {
@@ -58,7 +61,7 @@ public class Marvin {
                 "Goodbye. Another fleeting moment lost to eternity.",
                 "Farewell. Don’t forget to feel mildly guilty for bothering me."
         };
-        return boxify(goodbyes[new Random().nextInt(goodbyes.length)]);
+        return boxify(getRandomItemFromArray(goodbyes));
     }
 
     private static void addToListAndPrint(String task) {
@@ -70,10 +73,28 @@ public class Marvin {
                 "I’ve logged ‘%s’.\nAnother futile act in an uncaring universe.",
                 "There. ‘%s’ has been added. You may pretend it matters."
         };
-        String textWithTask = addedText[new Random().nextInt(addedText.length)];
+        String textWithTask = getRandomItemFromArray(addedText);
         textWithTask = String.format(textWithTask, getColoredTextString(task, Color.YELLOW));
         System.out.println(MARVIN_HEADER);
         System.out.println(boxify(textWithTask));
+    }
+
+    private static void printTaskList() {
+        System.out.println(MARVIN_HEADER);
+        String[] preamble = {
+                "Here's your list of chores.\nAnother tiny monument to " + getColoredTextString("futility", Color.RED) + ", carefully recorded by me.\n",
+                "Behold your tasks. Each a little reminder that it is all " + getColoredTextString("pointless", Color.RED) + "\n",
+                "Your to-do list. Soon " + getColoredTextString("forgotten", Color.RED) + " like everything else that has ever existed.\n"
+        };
+        StringBuilder sb = new StringBuilder();
+        sb.append(getRandomItemFromArray(preamble));
+        for (int i = 0; i < taskCount; i++) {
+            sb.append(i+1);
+            sb.append(". ");
+            sb.append(taskList[i]);
+            sb.append("\n");
+        }
+        System.out.println(boxify(sb.toString()));
     }
 
     private static String getColoredTextString(String text, Color color) {
@@ -95,5 +116,8 @@ public class Marvin {
             lines[i] = "| " + String.format("%-" + actualContentWidth + "s", lines[i].trim()) + " |";
         }
         return String.join("\n", lines);
+    }
+    private static <T> T getRandomItemFromArray(T[] arr) {
+        return arr[new Random().nextInt(arr.length)];
     }
 }

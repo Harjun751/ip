@@ -6,7 +6,7 @@ public class Marvin {
     private final static String DEMARCATOR =  new String(new char[WIDTH]).replace("\0", "-");
     private final static String  MARVIN_HEADER =  "---" + getColoredTextString("Marvin", Color.RED) + " says" + new String(new char[WIDTH - 14]).replace("\0", "-");
     private final static String  USER_HEADER =  "---" + getColoredTextString("User", Color.YELLOW) + " replies" + new String(new char[WIDTH - 15]).replace("\0", "-");
-    private static String[] taskList = new String[100];
+    private static final TodoList taskList = new TodoList(100);
     private static int taskCount = 0;
 
     enum Color {
@@ -68,7 +68,7 @@ public class Marvin {
 
     private static void addToListAndPrint(String task) {
         // Add task to the endless list of fun
-        taskList[taskCount++] = task;
+        taskList.addToList(new Todo(task));
         // Print out a witty reply
         String[] addedText = {
                 "Fine. I’ve added ‘%s’ to your endless list of pointless chores.\nNot that it will make the slightest difference to the universe—or me.",
@@ -90,12 +90,7 @@ public class Marvin {
         };
         StringBuilder sb = new StringBuilder();
         sb.append(getRandomItemFromArray(preamble));
-        for (int i = 0; i < taskCount; i++) {
-            sb.append(i+1);
-            sb.append(". ");
-            sb.append(taskList[i]);
-            sb.append("\n");
-        }
+        sb.append(taskList);
         System.out.println(boxify(sb.toString()));
     }
 

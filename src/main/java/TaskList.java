@@ -1,11 +1,11 @@
-public class TodoList {
+public class TaskList {
     private final int SIZE;
-    private final Todo[] list;
+    private final Task[] list;
     private int count = 0;
 
-    public TodoList(int size) {
+    public TaskList(int size) {
         SIZE = size;
-        this.list = new Todo[SIZE];
+        this.list = new Task[SIZE];
     }
 
     /**

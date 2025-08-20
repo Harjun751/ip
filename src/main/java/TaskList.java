@@ -35,6 +35,23 @@ public class TaskList {
         return task.toString();
     }
 
+    /**
+    * Removes a task at a given index
+     * @throws ArrayIndexOutOfBoundsException If index supplied is not a valid index for a task
+     * @param index The index at which the desired task object resides
+     * @return The string representation of the object deleted
+     */
+    public String removeTask(int index) {
+        // Throw error if index supplied is bigger than size
+        // or bigger than the current count
+        if (index >= count || index < 0) {
+            throw new ArrayIndexOutOfBoundsException("Invalid index");
+        }
+        Task task = this.list.remove(index);
+        count--;
+        return task.toString();
+    }
+
     public int getCount() {
         return this.count;
     }

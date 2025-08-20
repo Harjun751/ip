@@ -71,6 +71,25 @@ public class Marvin {
                         addToListAndPrint(t);
                     }
                     break;
+                case "delete":
+                    try {
+                        int index = scan.nextInt();
+                        // mark tasked based on command input
+                        String old = taskList.removeTask(index - 1);
+                        System.out.println(MARVIN_HEADER);
+                        System.out.println(boxify(
+                                "I've removed the task.\n" + old + "\nNow you have " + taskList.getCount() +
+                                        " tasks and absolutely nothing will change."
+                        ));
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println(MARVIN_HEADER);
+                        System.out.println(boxify("That task doesn't exist. Just like " + getColoredTextString("hope", Color.RED) + "."));
+                    } catch (InputMismatchException ignored) {
+                        // let case fall through to default
+                        System.out.println(MARVIN_HEADER);
+                        System.out.println(boxify("You need a number to delete. Sigh."));
+                    }
+                    break;
                 case "mark":
                 case "unmark":
                     try {

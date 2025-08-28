@@ -1,5 +1,9 @@
-import java.util.InputMismatchException;
-import java.util.Random;
+package duke;
+
+import duke.command.Command;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 import java.util.Scanner;
 
 public class Marvin {

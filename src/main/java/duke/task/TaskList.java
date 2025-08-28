@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -10,8 +12,8 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * Adds a Todo object to the TodoList.
-     * @param task a Todo object representing the task to be added
+     * Adds a duke.task.Todo object to the TodoList.
+     * @param task a duke.task.Todo object representing the task to be added
      */
     public void addToList(Task task) {
         this.list.add(task);

@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.task.TaskList;
+import duke.ui.Color;
+import duke.ui.Ui;
+
 public class MarkTaskCommand extends Command {
     public boolean toMark;
     public int index;

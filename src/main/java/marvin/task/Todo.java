@@ -14,10 +14,11 @@ public class Todo extends Task {
     public String toString() {
         // Construct string based on description and status
         String mark;
-        if (this.getDone())
+        if (this.getDone()) {
             mark = "X";
-        else
+        } else {
             mark = " ";
+        }
         return String.format("[T][%s] %s", mark, this.getDescription());
     }
 }

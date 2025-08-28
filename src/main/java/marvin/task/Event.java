@@ -17,10 +17,11 @@ public class Event extends Task {
     public String toString() {
         // Construct string based on description and status
         String mark;
-        if (this.getDone())
+        if (this.getDone()) {
             mark = "X";
-        else
+        } else {
             mark = " ";
+        }
         return String.format("[E][%s] %s (from: %s to: %s)", mark, this.getDescription(),
                 this.from.format(DateTimeFormatter.ofPattern(
                         "dd-MM-yyyy, ha"

@@ -17,21 +17,22 @@ public abstract class Task implements Serializable {
         this.done = done;
     }
 
-    /**
-     * A setter for the done parameter.
-     * Affects the string display of the item.
-     * @param done represents the new state of doneness of the task
-     */
-    public void setDone(boolean done) {
-        this.done = done;
-    }
-
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 
     public boolean getDone() {
         return this.done;
+    }
+
+    /**
+     * A setter for the done parameter.
+     * Affects the string display of the item.
+     *
+     * @param done represents the new state of doneness of the task
+     */
+    public void setDone(boolean done) {
+        this.done = done;
     }
 
     @Override

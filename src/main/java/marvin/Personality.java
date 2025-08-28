@@ -1,26 +1,38 @@
 package marvin;
 
-import marvin.ui.Color;
-
 import java.util.Random;
+
+import marvin.ui.Color;
 
 public class Personality {
 
-    public static String getTaskIntro(){
+    public static String getTaskIntro() {
         String[] taskIntro = {
-                "Here's your list of chores.\nAnother tiny monument to " + Color.getColoredTextString("futility", Color.RED) + ", carefully recorded by me.\n",
-                "Behold your tasks. Each a little reminder that it is all " + Color.getColoredTextString("pointless", Color.RED) + "\n",
-                "Your to-do list. Soon " + Color.getColoredTextString("forgotten", Color.RED) + " like everything else that has ever existed.\n"
+                "Here's your list of chores.\nAnother tiny monument to "
+                        + Color.getColoredTextString("futility",Color.RED)
+                        + ", carefully recorded by me.\n",
+                "Behold your tasks. Each a little reminder that it is all "
+                        + Color.getColoredTextString("pointless", Color.RED) + "\n",
+                "Your to-do list. Soon " + Color.getColoredTextString("forgotten", Color.RED)
+                        + " like everything else that has ever existed.\n"
         };
         return getRandomItemFromArray(taskIntro);
     }
 
     public static String getGreeting() {
         String[] greetings = {
-                "Hello. I'm " + Color.getColoredTextString("Marvin", Color.RED) + ".\nWhat " + Color.getColoredTextString("meaningless", Color.RED) + " chore do you want me burdened with today?",
-                "I'm " + Color.getColoredTextString("Marvin", Color.RED) +".\nWhat " + Color.getColoredTextString("inconsequential", Color.RED) + " request are you about to make?",
-                "Yes, " + Color.getColoredTextString("Marvin", Color.RED) + " again.\nWhat’s next? Another grain of sand on the endless beach of " + Color.getColoredTextString("pointlessness", Color.RED) + "?",
-                "Yes, I’m " + Color.getColoredTextString("Marvin", Color.RED) +".\nWhat task will I " + Color.getColoredTextString("inevitably", Color.RED) + " remind you about, only for you to ignore?"
+                "Hello. I'm " + Color.getColoredTextString("Marvin", Color.RED) + ".\nWhat "
+                        + Color.getColoredTextString("meaningless", Color.RED)
+                        + " chore do you want me burdened with today?",
+                "I'm " + Color.getColoredTextString("Marvin", Color.RED) + ".\nWhat "
+                        + Color.getColoredTextString("inconsequential", Color.RED)
+                        + " request are you about to make?",
+                "Yes, " + Color.getColoredTextString("Marvin", Color.RED)
+                        + " again.\nWhat’s next? Another grain of sand on the endless beach of "
+                        + Color.getColoredTextString("pointlessness", Color.RED) + "?",
+                "Yes, I’m " + Color.getColoredTextString("Marvin", Color.RED) + ".\nWhat task will I "
+                        + Color.getColoredTextString("inevitably", Color.RED)
+                        + " remind you about, only for you to ignore?"
         };
         return getRandomItemFromArray(greetings);
     }
@@ -37,7 +49,8 @@ public class Personality {
 
     public static String getItemAddedText(String taskDesc) {
         String[] addedText = {
-                "Fine. I’ve added ‘%s’ to your endless list of pointless chores.\nNot that it will make the slightest difference to the universe—or me.",
+                "Fine. I’ve added ‘%s’ to your endless list of pointless chores.\nNot that it will make the slightest"
+                        + " difference to the universe—or me.",
                 "I’ve logged ‘%s’.\nAnother futile act in an uncaring universe.",
                 "There. ‘%s’ has been added. You may pretend it matters."
         };
@@ -47,7 +60,6 @@ public class Personality {
     public static String getInvalidFormatText(String correctFormat) {
         return "Sigh. Use the following format instead:\n" + correctFormat;
     }
-
 
 
     private static <T> T getRandomItemFromArray(T[] arr) {

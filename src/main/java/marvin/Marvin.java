@@ -17,6 +17,9 @@ public class Marvin {
         this.tasks = StorageHandler.loadTaskList();
     }
 
+    /**
+     * The core loop and entrypoint for the Marvin chatbot.
+     */
     public void run() {
         Ui.printGreeting(Personality.getGreeting());
         boolean isExit = false;

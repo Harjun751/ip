@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,7 +13,7 @@ public class Parser {
         if (matcher.find()) {
             String description = matcher.group(1);
             String due = matcher.group(2);
-            LocalDate dueDate = LocalDate.parse(
+            LocalDateTime dueDate = LocalDateTime.parse(
                     due,
                     FORMAT
             );
@@ -28,8 +29,16 @@ public class Parser {
         if (matcher.find()) {
             String description = matcher.group(1);
             String from = matcher.group(2);
+            LocalDateTime fromDate = LocalDateTime.parse(
+                    from,
+                    FORMAT
+            );
             String to = matcher.group(3);
-            return new Event(description, from, to);
+            LocalDateTime toDate = LocalDateTime.parse(
+                    to,
+                    FORMAT
+            );
+            return new Event(description, fromDate, toDate);
         } else {
             throw new IllegalStateException();
         }

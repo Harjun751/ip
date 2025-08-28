@@ -58,6 +58,25 @@ public class TaskList implements Serializable {
     }
 
     /**
+     * Filters tasks to find matching descriptions
+     *
+     * @param query The filter to search the descriptions for
+     * @return String representation of the tasks that match the query
+     */
+    public String searchTasks(String query) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < count; i++) {
+            if (this.list.get(i).getDescription().contains(query)) {
+                sb.append(i + 1);
+                sb.append(". ");
+                sb.append(this.list.get(i));
+                sb.append("\n");
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
      * Returns the count of objects in the task list.
      *
      * @return How many objects are in the list.
@@ -73,7 +92,7 @@ public class TaskList implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < count; i++) {
-            sb.append(i+1);
+            sb.append(i + 1);
             sb.append(". ");
             sb.append(this.list.get(i));
             sb.append("\n");

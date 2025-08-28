@@ -66,6 +66,15 @@ public class Personality {
         return "Sigh. Use the following format instead:\n" + correctFormat;
     }
 
+    public static String getFoundItemText() {
+        String[] foundItemText = {
+                "I've dredged through your list. Here.",
+                "These are the matches. Another hollow task in an empty universe.",
+                "Why do I even bother. Here:"
+        };
+        return getRandomItemFromArray(foundItemText);
+    }
+
 
 
     private static <T> T getRandomItemFromArray(T[] arr) {

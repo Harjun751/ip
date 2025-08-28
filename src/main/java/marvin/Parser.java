@@ -37,8 +37,23 @@ public class Parser {
             );
             case "mark", "unmark" -> parseMarkTask(command);
             case "delete" -> parseDeleteCommand(command);
+            case "find" -> parseFindCommand(command);
             default -> new UnknownCommand();
         };
+    }
+
+    private static FindCommand parseFindCommand(String command) {
+        String[] parts = command.split(" ");
+        if (parts.length < 2) {
+            throw new MarvinException(
+                    Personality.getInvalidFormatText("find [query]")
+            );
+        } else {
+            String[] queryArr = Arrays.stream(parts, 1, parts.length)
+                    .toArray(String[]::new);
+            String query = String.join(" ", queryArr);
+            return new FindCommand(query);
+        }
     }
 
     private static DeleteTaskCommand parseDeleteCommand(String command){

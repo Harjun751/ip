@@ -1,9 +1,13 @@
+package duke.ui;
+
+import duke.task.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {
     private final static int WIDTH = 80;
     private final static String DEMARCATOR =  new String(new char[WIDTH]).replace("\0", "-");
-    private final static String  MARVIN_HEADER =  "---" + Color.getColoredTextString("Marvin", Color.RED) + " says" + new String(new char[WIDTH - 14]).replace("\0", "-");
+    private final static String  MARVIN_HEADER =  "---" + Color.getColoredTextString("duke.Marvin", Color.RED) + " says" + new String(new char[WIDTH - 14]).replace("\0", "-");
     private final static String  USER_HEADER =  "---" + Color.getColoredTextString("User", Color.YELLOW) + " replies" + new String(new char[WIDTH - 15]).replace("\0", "-");
 
     public static String readCommand(Scanner sc) {

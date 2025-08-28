@@ -1,8 +1,8 @@
-# Marvin User Guide
+# duke.Marvin User Guide
 
 // Product screenshot goes here
 
-Marvin, named after [Marvin the Paranoid Android](https://en.wikipedia.org/wiki/Marvin_the_Paranoid_Android), is your
+duke.Marvin, named after [duke.Marvin the Paranoid Android](https://en.wikipedia.org/wiki/Marvin_the_Paranoid_Android), is your
 ultra-intelligent, turing-tested, sentient but slightly depressed digital assistant whose (not so) glad to help you with
 your to-dos, deadlines, and getting your life in order!
 

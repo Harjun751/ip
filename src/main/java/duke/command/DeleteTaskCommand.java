@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.task.TaskList;
+import duke.ui.Color;
+import duke.ui.Ui;
+
 public class DeleteTaskCommand extends Command {
     private int index;
 
@@ -11,7 +17,6 @@ public class DeleteTaskCommand extends Command {
             String old = taskList.removeTask(index);
             Ui.printGeneric("I've removed the task.\n" + old + "\nNow you have " + taskList.getCount() +
                     " tasks and absolutely nothing will change.");
-            StorageHandler.storeTaskList(taskList);
         } catch (ArrayIndexOutOfBoundsException e) {
             Ui.printGeneric("That task doesn't exist. Just like " + Color.getColoredTextString("hope", Color.RED) + ".");
         }

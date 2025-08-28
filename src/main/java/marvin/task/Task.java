@@ -20,6 +20,7 @@ public abstract class Task implements Serializable {
     /**
      * A setter for the done parameter.
      * Affects the string display of the item.
+     *
      * @param done represents the new state of doneness of the task
      */
     public void setDone(boolean done) {

@@ -12,8 +12,9 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * Adds a duke.task.Todo object to the TodoList.
-     * @param task a duke.task.Todo object representing the task to be added
+     * Adds a Task object to the Task List.
+     *
+     * @param task a Task object representing the task to be added.
      */
     public void addToList(Task task) {
         this.list.add(task);
@@ -21,28 +22,29 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * Marks a task at a given index as the supplied done state
-     * @throws ArrayIndexOutOfBoundsException If index supplied is not a valid index for a task
-     * @param index The index at which the desired task object resides
-     * @param done The state at which to set the task object
-     * @return The string representation of the object after the operation
+     * Marks a task at a given index as the supplied done state.
+     *
+     * @param index The index at which the desired task object resides.
+     * @param isDone The state at which to set the task object.
+     * @throws ArrayIndexOutOfBoundsException If index supplied is not a valid index for a task.
+     * @return The string representation of the object after the operation is complete.
      */
-    public String markTask(int index, boolean done) {
+    public String markTask(int index, boolean isDone) {
         // Throw error if index supplied is bigger than size
         // or bigger than the current count
         if (index >= count || index < 0) {
             throw new ArrayIndexOutOfBoundsException("Invalid index");
         }
         Task task = this.list.get(index);
-        task.setDone(done);
+        task.setDone(isDone);
         return task.toString();
     }
 
     /**
-    * Removes a task at a given index
-     * @throws ArrayIndexOutOfBoundsException If index supplied is not a valid index for a task
-     * @param index The index at which the desired task object resides
-     * @return The string representation of the object deleted
+     * Removes a task at the given index in the task list.
+     *
+     * @throws ArrayIndexOutOfBoundsException If index supplied is not a valid index for a task.
+     * @return The string representation of the object deleted.
      */
     public String removeTask(int index) {
         // Throw error if index supplied is bigger than size
@@ -55,10 +57,18 @@ public class TaskList implements Serializable {
         return task.toString();
     }
 
+    /**
+     * Returns the count of objects in the task list.
+     *
+     * @return How many objects are in the list.
+     */
     public int getCount() {
         return this.count;
     }
 
+    /**
+     * Returns the stylized string representation of the task list.
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

@@ -7,6 +7,12 @@ import java.io.*;
 public class StorageHandler {
     private static final String FILE_PATH = "./save.mrvn";
 
+    /**
+     * Loads a task list from a static predefined save location.
+     * Simply creates a new task list if IO errors were encountered
+     *
+     * @return A TaskList object representing the loaded file
+     */
     public static TaskList loadTaskList() {
         try {
             FileInputStream fis = new FileInputStream(FILE_PATH);
@@ -20,6 +26,12 @@ public class StorageHandler {
         }
     }
 
+    /**
+     * Stores a task list into the predefined save location.
+     * Prints a warning if the Task List failed to save.
+     *
+     * @param taskList The Task List to save.
+     */
     public static void storeTaskList(TaskList taskList) {
         try {
             FileOutputStream fos = new FileOutputStream(FILE_PATH);

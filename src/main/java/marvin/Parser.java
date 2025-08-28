@@ -15,6 +15,12 @@ import java.util.regex.Pattern;
 public class Parser {
     private final static DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
+    /**
+     * Parses an input and determines an action for the chatbot to run.
+     *
+     * @param command The input from the user who desires to complete a task.
+     * @return A Command object suitable to be executed to perform the task.
+     */
     public static Command parse(String command){
         String initial = command.split(" ")[0];
         return switch (initial) {

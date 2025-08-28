@@ -6,6 +6,9 @@ import java.util.Random;
 
 public class Personality {
 
+    /**
+     * Returns a random, string from Marvin to introduce the list of tasks.
+     */
     public static String getTaskIntro(){
         String[] taskIntro = {
                 "Here's your list of chores.\nAnother tiny monument to " + Color.getColoredTextString("futility", Color.RED) + ", carefully recorded by me.\n",
@@ -15,6 +18,9 @@ public class Personality {
         return getRandomItemFromArray(taskIntro);
     }
 
+    /**
+     * Returns a random greeting from Marvin
+     */
     public static String getGreeting() {
         String[] greetings = {
                 "Hello. I'm " + Color.getColoredTextString("Marvin", Color.RED) + ".\nWhat " + Color.getColoredTextString("meaningless", Color.RED) + " chore do you want me burdened with today?",
@@ -25,6 +31,9 @@ public class Personality {
         return getRandomItemFromArray(greetings);
     }
 
+    /**
+     * Returns a random goodbye from Marvin
+     */
     public static String getGoodbye() {
         String[] goodbyes = {
                 "Farewell. Not that it matters.",
@@ -35,6 +44,10 @@ public class Personality {
         return getRandomItemFromArray(goodbyes);
     }
 
+    /**
+     * Returns a random, personalized string from Marvin.
+     * Tells the user that a specific item was added to the list.
+     */
     public static String getItemAddedText(String taskDesc) {
         String[] addedText = {
                 "Fine. I’ve added ‘%s’ to your endless list of pointless chores.\nNot that it will make the slightest difference to the universe—or me.",
@@ -44,6 +57,11 @@ public class Personality {
         return String.format(getRandomItemFromArray(addedText), Color.getColoredTextString(taskDesc, Color.YELLOW));
     }
 
+    /**
+     * Returns a string from Marvin telling the user that the format was wrong
+     *
+     * @param correctFormat The correct format to use the command.
+     */
     public static String getInvalidFormatText(String correctFormat) {
         return "Sigh. Use the following format instead:\n" + correctFormat;
     }

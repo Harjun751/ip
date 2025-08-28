@@ -31,14 +31,20 @@ public class Personality {
         return getRandomItemFromArray(goodbyes);
     }
 
-    public static String getItemAddedText() {
+    public static String getItemAddedText(String taskDesc) {
         String[] addedText = {
                 "Fine. I’ve added ‘%s’ to your endless list of pointless chores.\nNot that it will make the slightest difference to the universe—or me.",
                 "I’ve logged ‘%s’.\nAnother futile act in an uncaring universe.",
                 "There. ‘%s’ has been added. You may pretend it matters."
         };
-        return getRandomItemFromArray(addedText);
+        return String.format(getRandomItemFromArray(addedText), Color.getColoredTextString(taskDesc, Color.YELLOW));
     }
+
+    public static String getInvalidFormatText(String correctFormat) {
+        return "Sigh. Use the following format instead:\n" + correctFormat;
+    }
+
+
 
     private static <T> T getRandomItemFromArray(T[] arr) {
         return arr[new Random(1).nextInt(arr.length)];

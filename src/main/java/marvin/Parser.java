@@ -1,16 +1,23 @@
 package marvin;
 
-import marvin.command.*;
-import marvin.task.Deadline;
-import marvin.task.Event;
-import marvin.task.Todo;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import marvin.command.AddTaskCommand;
+import marvin.command.Command;
+import marvin.command.DeleteTaskCommand;
+import marvin.command.ExitCommand;
+import marvin.command.FindCommand;
+import marvin.command.ListTaskCommand;
+import marvin.command.MarkTaskCommand;
+import marvin.command.UnknownCommand;
+import marvin.task.Deadline;
+import marvin.task.Event;
+import marvin.task.Todo;
 
 public class Parser {
     private final static DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
@@ -21,7 +28,7 @@ public class Parser {
      * @param command The input from the user who desires to complete a task.
      * @return A Command object suitable to be executed to perform the task.
      */
-    public static Command parse(String command){
+    public static Command parse(String command) {
         String initial = command.split(" ")[0];
         return switch (initial) {
             case "bye" -> new ExitCommand();
@@ -56,7 +63,7 @@ public class Parser {
         }
     }
 
-    private static DeleteTaskCommand parseDeleteCommand(String command){
+    private static DeleteTaskCommand parseDeleteCommand(String command) {
         String[] parts = command.split(" ");
         if (parts.length < 2) {
             throw new MarvinException(
@@ -64,9 +71,9 @@ public class Parser {
             );
         }
         int index;
-        try{
+        try {
             index = Integer.parseInt(parts[1]);
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new MarvinException(
                     Personality.getInvalidFormatText("delete [index]")
             );
@@ -78,16 +85,16 @@ public class Parser {
         String[] parts = command.split(" ");
         if (parts.length < 2) {
             throw new MarvinException(
-                Personality.getInvalidFormatText(
-                        "mark/unmark [index]"
-                )
+                    Personality.getInvalidFormatText(
+                            "mark/unmark [index]"
+                    )
             );
         }
         boolean isMark = parts[0].equalsIgnoreCase("mark");
         int index;
-        try{
+        try {
             index = Integer.parseInt(parts[1]);
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new MarvinException(
                     Personality.getInvalidFormatText(
                             "mark/unmark [index]"
@@ -97,7 +104,7 @@ public class Parser {
         return new MarkTaskCommand(index - 1, isMark);
     }
 
-    private static Todo parseTodo(String text){
+    private static Todo parseTodo(String text) {
         String[] parts = text.split(" ");
         if (parts.length < 2) {
             throw new MarvinException(
@@ -156,9 +163,9 @@ public class Parser {
                 throw new IllegalStateException();
             }
         } catch (DateTimeParseException | IllegalStateException e) {
-        throw new MarvinException(
-                Personality.getInvalidFormatText("event [name] /from dd/MM/yyyy hhmm /to dd/MM/yyyy hhmm")
-        );
-    }
+            throw new MarvinException(
+                    Personality.getInvalidFormatText("event [name] /from dd/MM/yyyy hhmm /to dd/MM/yyyy hhmm")
+            );
+        }
     }
 }

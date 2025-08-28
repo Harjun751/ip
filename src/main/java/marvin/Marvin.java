@@ -1,20 +1,20 @@
 package marvin;
 
+import java.util.Scanner;
+
 import marvin.command.Command;
 import marvin.task.TaskList;
 import marvin.ui.Ui;
 
-import java.util.Scanner;
-
 public class Marvin {
-    private TaskList tasks;
-
-    public static void main(String[] args) {
-        new Marvin().run();
-    }
+    private final TaskList tasks;
 
     public Marvin() {
         this.tasks = StorageHandler.loadTaskList();
+    }
+
+    public static void main(String[] args) {
+        new Marvin().run();
     }
 
     /**
@@ -24,8 +24,8 @@ public class Marvin {
         Ui.printGreeting(Personality.getGreeting());
         boolean isExit = false;
         Scanner sc = new Scanner(System.in);
-        while (sc.hasNextLine()){
-            try{
+        while (sc.hasNextLine()) {
+            try {
                 String fullCommand = Ui.readCommand(sc);
                 Command c = Parser.parse(fullCommand);
                 c.execute(this.tasks);
@@ -34,10 +34,10 @@ public class Marvin {
                 if (isExit) {
                     return;
                 }
-            } catch (MarvinException e){
+            } catch (MarvinException e) {
                 Ui.printGeneric(e.getMessage());
             } finally {
-                if (!isExit){
+                if (!isExit) {
                     Ui.printUserInput();
                 }
             }

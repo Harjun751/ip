@@ -17,6 +17,14 @@ public abstract class Task implements Serializable {
         this.done = done;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
+    public boolean getDone() {
+        return this.done;
+    }
+
     /**
      * A setter for the done parameter.
      * Affects the string display of the item.
@@ -25,14 +33,6 @@ public abstract class Task implements Serializable {
      */
     public void setDone(boolean done) {
         this.done = done;
-    }
-
-    public String getDescription(){
-        return this.description;
-    }
-
-    public boolean getDone() {
-        return this.done;
     }
 
     @Override

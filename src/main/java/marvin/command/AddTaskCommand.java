@@ -16,9 +16,7 @@ public class AddTaskCommand extends Command {
     public void execute(TaskList taskList) {
         taskList.addToList(this.task);
 
-        Ui.printGeneric(
-                Personality.getItemAddedText(task.getDescription()) +
-                        "\nYou have " + taskList.getCount() + " task(s) in the list."
-        );
+        Ui.printGeneric(Personality.getItemAddedText(task.getDescription()) + "\nYou have " + taskList.getCount()
+                + " task(s) in the list.");
     }
 }

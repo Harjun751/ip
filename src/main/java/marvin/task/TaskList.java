@@ -55,6 +55,19 @@ public class TaskList implements Serializable {
         return task.toString();
     }
 
+    public String searchTasks(String query) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < count; i++) {
+            if (this.list.get(i).getDescription().contains(query)) {
+                sb.append(i + 1);
+                sb.append(". ");
+                sb.append(this.list.get(i));
+                sb.append("\n");
+            }
+        }
+        return sb.toString();
+    }
+
     public int getCount() {
         return this.count;
     }
@@ -63,7 +76,7 @@ public class TaskList implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < count; i++) {
-            sb.append(i+1);
+            sb.append(i + 1);
             sb.append(". ");
             sb.append(this.list.get(i));
             sb.append("\n");

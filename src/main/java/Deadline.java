@@ -1,7 +1,10 @@
-public class Deadline extends Task {
-    private String due;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, String due) {
+public class Deadline extends Task {
+    private LocalDateTime due;
+
+    public Deadline(String description, LocalDateTime due) {
         super(description);
         this.due = due;
     }
@@ -14,6 +17,10 @@ public class Deadline extends Task {
             mark = "X";
         else
             mark = " ";
-        return String.format("[D][%s] %s (by: %s)", mark, this.getDescription(), this.due);
+        return String.format("[D][%s] %s (by: %s)", mark, this.getDescription(),
+                this.due.format(DateTimeFormatter.ofPattern(
+                        "dd-MM-yyyy, ha"
+                ))
+        );
     }
 }

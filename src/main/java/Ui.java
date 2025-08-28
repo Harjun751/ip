@@ -6,9 +6,8 @@ public class Ui {
     private final static String  MARVIN_HEADER =  "---" + Color.getColoredTextString("Marvin", Color.RED) + " says" + new String(new char[WIDTH - 14]).replace("\0", "-");
     private final static String  USER_HEADER =  "---" + Color.getColoredTextString("User", Color.YELLOW) + " replies" + new String(new char[WIDTH - 15]).replace("\0", "-");
 
-    public static String readCommand() {
-        Scanner scan = new Scanner(System.in);
-        return scan.nextLine();
+    public static String readCommand(Scanner sc) {
+        return sc.nextLine();
     }
 
     public static void printGreeting(String greeting){

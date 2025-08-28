@@ -16,9 +16,10 @@ public class Marvin {
     public void run() {
         Ui.printGreeting(Personality.getGreeting());
         boolean isExit = false;
-        while (true){
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextLine()){
             try{
-                String fullCommand = Ui.readCommand();
+                String fullCommand = Ui.readCommand(sc);
                 Command c = Parser.parse(fullCommand);
                 c.execute(this.tasks);
                 StorageHandler.storeTaskList(this.tasks); // save state

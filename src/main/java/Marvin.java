@@ -7,7 +7,7 @@ public class Marvin {
     private final static String DEMARCATOR =  new String(new char[WIDTH]).replace("\0", "-");
     private final static String  MARVIN_HEADER =  "---" + getColoredTextString("Marvin", Color.RED) + " says" + new String(new char[WIDTH - 14]).replace("\0", "-");
     private final static String  USER_HEADER =  "---" + getColoredTextString("User", Color.YELLOW) + " replies" + new String(new char[WIDTH - 15]).replace("\0", "-");
-    private static final TaskList taskList = new TaskList();
+    private static TaskList taskList = StorageHandler.loadTaskList();
     private static int taskCount = 0;
 
     enum Color {
@@ -40,6 +40,7 @@ public class Marvin {
                         // pass the rest of the line into the parser
                         Deadline d = Parser.parseDeadline(scan.nextLine());
                         addToListAndPrint(d);
+                        StorageHandler.storeTaskList(Marvin.taskList);
                     } catch (Exception ignored) {
                         System.out.println(MARVIN_HEADER);
                         System.out.println(boxify(
@@ -52,6 +53,7 @@ public class Marvin {
                         // pass the rest of the line into the parser
                         Event e = Parser.parseEvent(scan.nextLine());
                         addToListAndPrint(e);
+                        StorageHandler.storeTaskList(Marvin.taskList);
                     } catch (Exception ignored) {
                         System.out.println(MARVIN_HEADER);
                         System.out.println(boxify(
@@ -69,6 +71,7 @@ public class Marvin {
                     } else {
                         Todo t = new Todo(input);
                         addToListAndPrint(t);
+                        StorageHandler.storeTaskList(Marvin.taskList);
                     }
                     break;
                 case "delete":
@@ -81,6 +84,7 @@ public class Marvin {
                                 "I've removed the task.\n" + old + "\nNow you have " + taskList.getCount() +
                                         " tasks and absolutely nothing will change."
                         ));
+                        StorageHandler.storeTaskList(Marvin.taskList);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         System.out.println(MARVIN_HEADER);
                         System.out.println(boxify("That task doesn't exist. Just like " + getColoredTextString("hope", Color.RED) + "."));
@@ -106,6 +110,7 @@ public class Marvin {
                         System.out.println(MARVIN_HEADER);
                         System.out.println(boxify("You need a number to mark/unmark. Sigh."));
                     }
+                    StorageHandler.storeTaskList(Marvin.taskList);
                     break;
                 default:
                     System.out.println(MARVIN_HEADER);

@@ -58,10 +58,10 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * Filters tasks to find matching descriptions
+     * Filters tasks to find matching descriptions.
      *
-     * @param query The filter to search the descriptions for
-     * @return String representation of the tasks that match the query
+     * @param query The filter to search the descriptions for.
+     * @return String representation of the tasks that match the query.
      */
     public String searchTasks(String query) {
         StringBuilder sb = new StringBuilder();

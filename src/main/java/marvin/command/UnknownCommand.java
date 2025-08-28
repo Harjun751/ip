@@ -1,7 +1,7 @@
-package duke.command;
+package marvin.command;
 
-import duke.task.TaskList;
-import duke.ui.Ui;
+import marvin.task.TaskList;
+import marvin.ui.Ui;
 
 public class UnknownCommand extends Command {
     @Override

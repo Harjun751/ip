@@ -1,4 +1,4 @@
-package duke.ui;
+package marvin.ui;
 
 public enum Color {
     RED("\u001B[31m"),

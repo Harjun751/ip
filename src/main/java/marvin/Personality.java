@@ -1,6 +1,6 @@
-package duke;
+package marvin;
 
-import duke.ui.Color;
+import marvin.ui.Color;
 
 import java.util.Random;
 
@@ -17,10 +17,10 @@ public class Personality {
 
     public static String getGreeting() {
         String[] greetings = {
-                "Hello. I'm " + Color.getColoredTextString("duke.Marvin", Color.RED) + ".\nWhat " + Color.getColoredTextString("meaningless", Color.RED) + " chore do you want me burdened with today?",
-                "I'm " + Color.getColoredTextString("duke.Marvin", Color.RED) +".\nWhat " + Color.getColoredTextString("inconsequential", Color.RED) + " request are you about to make?",
-                "Yes, " + Color.getColoredTextString("duke.Marvin", Color.RED) + " again.\nWhat’s next? Another grain of sand on the endless beach of " + Color.getColoredTextString("pointlessness", Color.RED) + "?",
-                "Yes, I’m " + Color.getColoredTextString("duke.Marvin", Color.RED) +".\nWhat task will I " + Color.getColoredTextString("inevitably", Color.RED) + " remind you about, only for you to ignore?"
+                "Hello. I'm " + Color.getColoredTextString("Marvin", Color.RED) + ".\nWhat " + Color.getColoredTextString("meaningless", Color.RED) + " chore do you want me burdened with today?",
+                "I'm " + Color.getColoredTextString("Marvin", Color.RED) +".\nWhat " + Color.getColoredTextString("inconsequential", Color.RED) + " request are you about to make?",
+                "Yes, " + Color.getColoredTextString("Marvin", Color.RED) + " again.\nWhat’s next? Another grain of sand on the endless beach of " + Color.getColoredTextString("pointlessness", Color.RED) + "?",
+                "Yes, I’m " + Color.getColoredTextString("Marvin", Color.RED) +".\nWhat task will I " + Color.getColoredTextString("inevitably", Color.RED) + " remind you about, only for you to ignore?"
         };
         return getRandomItemFromArray(greetings);
     }

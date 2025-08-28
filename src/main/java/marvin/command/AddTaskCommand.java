@@ -1,9 +1,9 @@
-package duke.command;
+package marvin.command;
 
-import duke.Personality;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.ui.Ui;
+import marvin.Personality;
+import marvin.task.Task;
+import marvin.task.TaskList;
+import marvin.ui.Ui;
 
 public class AddTaskCommand extends Command {
     private final Task task;

@@ -1,9 +1,9 @@
-package duke;
+package marvin;
 
-import duke.command.*;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
+import marvin.command.*;
+import marvin.task.Deadline;
+import marvin.task.Event;
+import marvin.task.Todo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

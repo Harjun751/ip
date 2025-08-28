@@ -1,8 +1,8 @@
-package duke.command;
+package marvin.command;
 
-import duke.task.TaskList;
-import duke.ui.Color;
-import duke.ui.Ui;
+import marvin.task.TaskList;
+import marvin.ui.Color;
+import marvin.ui.Ui;
 
 public class DeleteTaskCommand extends Command {
     private int index;

@@ -1,8 +1,8 @@
-package duke;
+package marvin;
 
-import duke.command.Command;
-import duke.task.TaskList;
-import duke.ui.Ui;
+import marvin.command.Command;
+import marvin.task.TaskList;
+import marvin.ui.Ui;
 
 import java.util.Scanner;
 

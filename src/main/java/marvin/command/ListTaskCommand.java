@@ -1,8 +1,8 @@
-package duke.command;
+package marvin.command;
 
-import duke.Personality;
-import duke.task.TaskList;
-import duke.ui.Ui;
+import marvin.Personality;
+import marvin.task.TaskList;
+import marvin.ui.Ui;
 
 public class ListTaskCommand extends Command {
     @Override

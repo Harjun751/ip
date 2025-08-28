@@ -1,4 +1,4 @@
-package duke;
+package marvin;
 
 public class MarvinException extends RuntimeException {
     public MarvinException(String deleteFormatText) {

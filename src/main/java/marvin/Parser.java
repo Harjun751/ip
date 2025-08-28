@@ -164,7 +164,8 @@ public class Parser {
             }
         } catch (DateTimeParseException | IllegalStateException e) {
             throw new MarvinException(
-                    Personality.getInvalidFormatText("event [name] /from dd/MM/yyyy hhmm /to dd/MM/yyyy hhmm")
+                    Personality
+                            .getInvalidFormatText("event [name] /from dd/MM/yyyy hhmm /to dd/MM/yyyy hhmm")
             );
         }
     }

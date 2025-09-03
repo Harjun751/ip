@@ -26,7 +26,7 @@ public class Ui {
      */
     public static void printGreeting(String greeting) {
         System.out.println(MARVIN_HEADER);
-        System.out.println(boxify(greeting));
+        System.out.println(surroundWithBox(greeting));
         System.out.println(USER_HEADER);
         System.out.print("↳");
     }
@@ -40,7 +40,7 @@ public class Ui {
      */
     public static void printTaskList(TaskList taskList, String preamble) {
         System.out.println(MARVIN_HEADER);
-        System.out.println(Ui.boxify(preamble + taskList));
+        System.out.println(Ui.surroundWithBox(preamble + taskList));
     }
 
     /**
@@ -48,7 +48,7 @@ public class Ui {
      */
     public static void printGoodbye(String goodbye) {
         System.out.println(MARVIN_HEADER);
-        System.out.println(boxify(goodbye));
+        System.out.println(surroundWithBox(goodbye));
         System.out.println(DEMARCATOR);
     }
 
@@ -57,7 +57,7 @@ public class Ui {
      */
     public static void printGeneric(String text) {
         System.out.println(MARVIN_HEADER);
-        System.out.println(boxify(text));
+        System.out.println(surroundWithBox(text));
     }
 
     /**
@@ -75,7 +75,7 @@ public class Ui {
      * @param input The text to be boxed.
      * @return The stylized string.
      */
-    private static String boxify(String input) {
+    private static String surroundWithBox(String input) {
         // split string by \ns
         String[] lines = input.split("\n");
         int contentWidth = WIDTH - 4;

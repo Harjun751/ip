@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * A Deadline object that contains a task description with an additional due date.
  */
 public class Deadline extends Task {
-    private final LocalDateTime due;
+    private final LocalDateTime dueTime;
 
     /**
      * Instantiates a deadline object.
@@ -17,7 +17,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, LocalDateTime due) {
         super(description);
-        this.due = due;
+        this.dueTime = due;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class Deadline extends Task {
             mark = " ";
         }
         return String.format("[D][%s] %s (by: %s)", mark, this.getDescription(),
-                this.due.format(DateTimeFormatter.ofPattern(
+                this.dueTime.format(DateTimeFormatter.ofPattern(
                         "dd-MM-yyyy, ha"
                 ))
         );

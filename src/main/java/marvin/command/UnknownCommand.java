@@ -10,9 +10,6 @@ public class UnknownCommand extends Command {
     @Override
     public CommandResult execute(TaskList taskList) {
         String reply = "I don’t recognize that command. Not that it would have mattered if I did.";
-        return new CommandResult(
-                () -> Ui.printGeneric(reply),
-                reply
-        );
+        return new CommandResult(() -> Ui.printGeneric(reply), reply);
     }
 }

@@ -23,7 +23,7 @@ public abstract class Task implements Serializable {
      * Instantiates a task.
      *
      * @param description The task description.
-     * @param isDone The state of completeness of the task.
+     * @param isDone      The state of completeness of the task.
      */
     public Task(String description, boolean isDone) {
         this.description = description;

@@ -11,10 +11,7 @@ public class ExitCommand extends Command {
     @Override
     public CommandResult execute(TaskList taskList) {
         String response = Personality.getGoodbye();
-        return new CommandResult(
-                () -> Ui.printGoodbye(response),
-                response
-        );
+        return new CommandResult(() -> Ui.printGoodbye(response), response);
     }
 
     @Override

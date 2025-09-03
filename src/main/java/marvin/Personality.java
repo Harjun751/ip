@@ -10,10 +10,10 @@ import marvin.ui.Color;
  */
 public class Personality {
     private static final String[] addedText = {
-            "Fine. I’ve added ‘%s’ to your endless list of pointless chores.\nNot that it will make the slightest"
-                    + " difference to the universe—or me.",
-            "I’ve logged ‘%s’.\nAnother futile act in an uncaring universe.",
-            "There. ‘%s’ has been added. You may pretend it matters."
+        "Fine. I’ve added ‘%s’ to your endless list of pointless chores.\nNot that it will make the slightest"
+                + " difference to the universe—or me.",
+        "I’ve logged ‘%s’.\nAnother futile act in an uncaring universe.",
+        "There. ‘%s’ has been added. You may pretend it matters."
     };
 
     /**
@@ -34,9 +34,9 @@ public class Personality {
 
     public static String getTaskIntroColorless() {
         String[] taskIntro = {
-                "Here's your list of chores.\nAnother tiny monument to futility, carefully recorded by me.\n",
-                "Behold your tasks. Each a little reminder that it is all pointless.\n",
-                "Your to-do list. Soon forgotten, like everything else that has ever existed.\n"
+            "Here's your list of chores.\nAnother tiny monument to futility, carefully recorded by me.\n",
+            "Behold your tasks. Each a little reminder that it is all pointless.\n",
+            "Your to-do list. Soon forgotten, like everything else that has ever existed.\n"
         };
         return getRandomItemFromArray(taskIntro);
     }
@@ -80,7 +80,8 @@ public class Personality {
      * Tells the user that a specific item was added to the list.
      */
     public static String getItemAddedText(String taskDesc) {
-        return String.format(getRandomItemFromArray(Personality.addedText), Color.getColoredTextString(taskDesc, Color.YELLOW));
+        return String.format(getRandomItemFromArray(Personality.addedText),
+                Color.getColoredTextString(taskDesc, Color.YELLOW));
     }
 
     /**

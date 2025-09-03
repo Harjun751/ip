@@ -25,13 +25,9 @@ public class DeleteTaskCommand extends Command {
             String oldTask = taskList.removeTask(index);
             String reply = "I've removed the task.\n" + oldTask + "\nNow you have " + taskList.getCount()
                     + " tasks and absolutely nothing will change.";
-            return new CommandResult(
-                () -> Ui.printGeneric(reply),
-                reply
-            );
+            return new CommandResult(() -> Ui.printGeneric(reply), reply);
         } catch (ArrayIndexOutOfBoundsException e) {
-            return new CommandResult(
-                    () -> Ui.printGeneric("That task doesn't exist. Just like "
+            return new CommandResult(() -> Ui.printGeneric("That task doesn't exist. Just like "
                             + Color.getColoredTextString("hope", Color.RED) + "."),
                     "That task doesn't exist. Just like hope."
             );

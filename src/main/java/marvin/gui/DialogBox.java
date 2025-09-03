@@ -2,16 +2,16 @@ package marvin.gui;
 
 import java.io.IOException;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
 
 /**
  * A DialogBox object representing a message from a user, containing an ImageView to represent the speaker's
@@ -27,7 +27,7 @@ public class DialogBox extends HBox {
      * Instantiate a dialog box representing a message from a user.
      *
      * @param text The text content of the message.
-     * @param img The image representing the user.
+     * @param img  The image representing the user.
      */
     private DialogBox(String text, Image img) {
         try {
@@ -44,16 +44,6 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and the text on the right
-     */
-    private void flip() {
-        this.setAlignment(Pos.TOP_LEFT);
-        ObservableList<Node> currentContents = FXCollections.observableArrayList(this.getChildren());
-        FXCollections.reverse(currentContents);
-        this.getChildren().setAll(currentContents);
-    }
-
-    /**
      * Instantiate a standard user dialog box
      */
     public static DialogBox getUserDialog(String s, Image i) {
@@ -67,5 +57,15 @@ public class DialogBox extends HBox {
         var db = new DialogBox(s, i);
         db.flip();
         return db;
+    }
+
+    /**
+     * Flips the dialog box such that the ImageView is on the left and the text on the right
+     */
+    private void flip() {
+        this.setAlignment(Pos.TOP_LEFT);
+        ObservableList<Node> currentContents = FXCollections.observableArrayList(this.getChildren());
+        FXCollections.reverse(currentContents);
+        this.getChildren().setAll(currentContents);
     }
 }

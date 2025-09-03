@@ -17,7 +17,7 @@ public enum Color {
     /**
      * Returns formatted, colored, text that is ready to be printed in a terminal.
      *
-     * @param text The text that is intended to be colored.
+     * @param text  The text that is intended to be colored.
      * @param color The color that the text is desired to be printed in.
      */
     public static String getColoredTextString(String text, Color color) {

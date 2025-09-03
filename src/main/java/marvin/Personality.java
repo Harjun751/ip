@@ -9,6 +9,12 @@ import marvin.ui.Color;
  * Includes methods to get greetings, goodbyes, and such.
  */
 public class Personality {
+    private static final String[] addedText = {
+            "Fine. I’ve added ‘%s’ to your endless list of pointless chores.\nNot that it will make the slightest"
+                    + " difference to the universe—or me.",
+            "I’ve logged ‘%s’.\nAnother futile act in an uncaring universe.",
+            "There. ‘%s’ has been added. You may pretend it matters."
+    };
 
     /**
      * Returns a random string from Marvin to introduce the list of tasks.
@@ -22,6 +28,15 @@ public class Personality {
                     + Color.getColoredTextString("pointless", Color.RED) + "\n",
             "Your to-do list. Soon " + Color.getColoredTextString("forgotten", Color.RED)
                     + " like everything else that has ever existed.\n"
+        };
+        return getRandomItemFromArray(taskIntro);
+    }
+
+    public static String getTaskIntroColorless() {
+        String[] taskIntro = {
+                "Here's your list of chores.\nAnother tiny monument to futility, carefully recorded by me.\n",
+                "Behold your tasks. Each a little reminder that it is all pointless.\n",
+                "Your to-do list. Soon forgotten, like everything else that has ever existed.\n"
         };
         return getRandomItemFromArray(taskIntro);
     }
@@ -65,13 +80,15 @@ public class Personality {
      * Tells the user that a specific item was added to the list.
      */
     public static String getItemAddedText(String taskDesc) {
-        String[] addedText = {
-            "Fine. I’ve added ‘%s’ to your endless list of pointless chores.\nNot that it will make the slightest"
-                    + " difference to the universe—or me.",
-            "I’ve logged ‘%s’.\nAnother futile act in an uncaring universe.",
-            "There. ‘%s’ has been added. You may pretend it matters."
-        };
-        return String.format(getRandomItemFromArray(addedText), Color.getColoredTextString(taskDesc, Color.YELLOW));
+        return String.format(getRandomItemFromArray(Personality.addedText), Color.getColoredTextString(taskDesc, Color.YELLOW));
+    }
+
+    /**
+     * Returns a random, personalized string from Marvin. Without color markers, making it suitable
+     * to be used for a GUI.
+     */
+    public static String getItemAddedTextColorless(String taskDesc) {
+        return String.format(getRandomItemFromArray(addedText), taskDesc);
     }
 
     /**

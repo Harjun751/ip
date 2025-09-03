@@ -10,8 +10,9 @@ public abstract class Command {
      * Performs a given action based on the concrete class.
      *
      * @param taskList The task list in which the changes should be reflected in.
+     * @return CommandResult object representing the reply of Marvin.
      */
-    public abstract void execute(TaskList taskList);
+    public abstract CommandResult execute(TaskList taskList);
 
     /**
      * Returns whether the program should exit after the command is executed.

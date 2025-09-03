@@ -3,6 +3,7 @@ package marvin;
 import java.util.Scanner;
 
 import marvin.command.Command;
+import marvin.command.CommandResult;
 import marvin.task.TaskList;
 import marvin.ui.Ui;
 
@@ -37,7 +38,8 @@ public class Marvin {
             try {
                 String fullCommand = Ui.readCommand(sc);
                 Command c = Parser.parse(fullCommand);
-                c.execute(this.tasks);
+                CommandResult crs = c.execute(this.tasks);
+                crs.printResponse();
                 StorageHandler.storeTaskList(this.tasks); // save state
                 isExit = c.isExit();
                 if (isExit) {
@@ -57,6 +59,12 @@ public class Marvin {
      * Generates a response for the user's chat message
      */
     public String getResponse(String input) {
-        return "Marvin heard: " + input;
+        try {
+            Command c = Parser.parse(input);
+            CommandResult crs = c.execute(this.tasks);
+            return crs.getMessage();
+        } catch (MarvinException e) {
+            return e.getMessage();
+        }
     }
 }

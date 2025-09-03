@@ -28,6 +28,16 @@ public class ParserTest {
     }
 
     @Test
+    public void parse_incompleteMarkInput_throwsException() {
+        try {
+            Command c = parse("mark");
+            fail();
+        } catch (Exception e) {
+            assertEquals(MarvinException.class, e.getClass());
+        }
+    }
+
+    @Test
     public void parse_validTodoInput_returnsAddTaskCommand() {
         Command c = parse("todo this");
         assertEquals(AddTaskCommand.class, c.getClass());

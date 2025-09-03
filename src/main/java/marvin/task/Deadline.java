@@ -13,7 +13,7 @@ public class Deadline extends Task {
      * Instantiates a deadline object.
      *
      * @param description The main description of the deadline.
-     * @param due The LocalDateTime object representing the due date of the task.
+     * @param due         The LocalDateTime object representing the due date of the task.
      */
     public Deadline(String description, LocalDateTime due) {
         super(description);

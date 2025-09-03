@@ -9,8 +9,9 @@ import marvin.ui.Ui;
  */
 public class ExitCommand extends Command {
     @Override
-    public void execute(TaskList taskList) {
-        Ui.printGoodbye(Personality.getGoodbye());
+    public CommandResult execute(TaskList taskList) {
+        String response = Personality.getGoodbye();
+        return new CommandResult(() -> Ui.printGoodbye(response), response);
     }
 
     @Override

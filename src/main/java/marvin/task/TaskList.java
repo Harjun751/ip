@@ -27,7 +27,7 @@ public class TaskList implements Serializable {
     /**
      * Marks a task at a given index as the supplied done state.
      *
-     * @param index The index at which the desired task object resides.
+     * @param index  The index at which the desired task object resides.
      * @param isDone The state at which to set the task object.
      * @return The string representation of the object after the operation is complete.
      * @throws ArrayIndexOutOfBoundsException If index supplied is not a valid index for a task.

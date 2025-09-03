@@ -20,11 +20,9 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList) {
+    public CommandResult execute(TaskList taskList) {
         String found = taskList.searchTasks(this.query);
-        Ui.printGeneric(
-                Personality.getFoundItemText()
-                        + "\n" + found
-        );
+        String reply = Personality.getFoundItemText() + "\n" + found;
+        return new CommandResult(() -> Ui.printGeneric(reply), reply);
     }
 }

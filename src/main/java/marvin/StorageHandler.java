@@ -9,6 +9,10 @@ import java.io.ObjectOutputStream;
 
 import marvin.task.TaskList;
 
+/**
+ * Manages loading/saving a given TaskList to the disk.
+ * Serializes the TaskList object.
+ */
 public class StorageHandler {
     private static final String FILE_PATH = "./save.mrvn";
 

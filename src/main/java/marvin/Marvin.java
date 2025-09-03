@@ -6,13 +6,22 @@ import marvin.command.Command;
 import marvin.task.TaskList;
 import marvin.ui.Ui;
 
+/**
+ * Encapsulates the entrypoint to the Marvin application.
+ */
 public class Marvin {
     private final TaskList tasks;
 
+    /**
+     * Initiates Marvin, loading a task list from storage if applicable.
+     */
     public Marvin() {
         this.tasks = StorageHandler.loadTaskList();
     }
 
+    /**
+     * Initiates and begins running Marvin.
+     */
     public static void main(String[] args) {
         new Marvin().run();
     }

@@ -3,12 +3,15 @@ package marvin.task;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Contains the logic for managing the overall task list for Marvin.
+ */
 public class TaskList implements Serializable {
-    private final ArrayList<Task> list;
+    private final ArrayList<Task> tasks;
     private int count = 0;
 
     public TaskList() {
-        this.list = new ArrayList<Task>();
+        this.tasks = new ArrayList<Task>();
     }
 
     /**
@@ -17,7 +20,7 @@ public class TaskList implements Serializable {
      * @param task a Task object representing the task to be added.
      */
     public void addToList(Task task) {
-        this.list.add(task);
+        this.tasks.add(task);
         count++;
     }
 
@@ -26,8 +29,8 @@ public class TaskList implements Serializable {
      *
      * @param index The index at which the desired task object resides.
      * @param isDone The state at which to set the task object.
-     * @throws ArrayIndexOutOfBoundsException If index supplied is not a valid index for a task.
      * @return The string representation of the object after the operation is complete.
+     * @throws ArrayIndexOutOfBoundsException If index supplied is not a valid index for a task.
      */
     public String markTask(int index, boolean isDone) {
         // Throw error if index supplied is bigger than size
@@ -35,16 +38,16 @@ public class TaskList implements Serializable {
         if (index >= count || index < 0) {
             throw new ArrayIndexOutOfBoundsException("Invalid index");
         }
-        Task task = this.list.get(index);
-        task.setDone(isDone);
+        Task task = this.tasks.get(index);
+        task.setIsDone(isDone);
         return task.toString();
     }
 
     /**
      * Removes a task at the given index in the task list.
      *
-     * @throws ArrayIndexOutOfBoundsException If index supplied is not a valid index for a task.
      * @return The string representation of the object deleted.
+     * @throws ArrayIndexOutOfBoundsException If index supplied is not a valid index for a task.
      */
     public String removeTask(int index) {
         // Throw error if index supplied is bigger than size
@@ -52,7 +55,7 @@ public class TaskList implements Serializable {
         if (index >= count || index < 0) {
             throw new ArrayIndexOutOfBoundsException("Invalid index");
         }
-        Task task = this.list.remove(index);
+        Task task = this.tasks.remove(index);
         count--;
         return task.toString();
     }
@@ -66,10 +69,10 @@ public class TaskList implements Serializable {
     public String searchTasks(String query) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < count; i++) {
-            if (this.list.get(i).getDescription().contains(query)) {
+            if (this.tasks.get(i).getDescription().contains(query)) {
                 sb.append(i + 1);
                 sb.append(". ");
-                sb.append(this.list.get(i));
+                sb.append(this.tasks.get(i));
                 sb.append("\n");
             }
         }
@@ -94,7 +97,7 @@ public class TaskList implements Serializable {
         for (int i = 0; i < count; i++) {
             sb.append(i + 1);
             sb.append(". ");
-            sb.append(this.list.get(i));
+            sb.append(this.tasks.get(i));
             sb.append("\n");
         }
         return sb.toString();

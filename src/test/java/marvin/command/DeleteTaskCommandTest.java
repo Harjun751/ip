@@ -1,16 +1,15 @@
 package marvin.command;
 
-import marvin.MarvinException;
-import marvin.task.TaskList;
-import marvin.task.Todo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import marvin.task.TaskList;
+import marvin.task.Todo;
 
 public class DeleteTaskCommandTest {
     @Test
-    public void deleteTaskCommand_validCommand_deletesTask(){
+    public void deleteTaskCommand_validCommand_deletesTask() {
         // Arrange
         DeleteTaskCommand dtc = new DeleteTaskCommand(0);
         TaskList tl = new TaskList();
@@ -25,7 +24,7 @@ public class DeleteTaskCommandTest {
     }
 
     @Test
-    public void deleteTaskCommand_invalidCommand_doesNotDeleteTask(){
+    public void deleteTaskCommand_invalidCommand_doesNotDeleteTask() {
         // Arrange
         DeleteTaskCommand dtc = new DeleteTaskCommand(1);
         TaskList tl = new TaskList();

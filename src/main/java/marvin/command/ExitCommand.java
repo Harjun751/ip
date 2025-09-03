@@ -4,6 +4,9 @@ import marvin.Personality;
 import marvin.task.TaskList;
 import marvin.ui.Ui;
 
+/**
+ * Contains logic for the exit command in Marvin.
+ */
 public class ExitCommand extends Command {
     @Override
     public void execute(TaskList taskList) {

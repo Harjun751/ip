@@ -4,13 +4,16 @@ import java.util.Scanner;
 
 import marvin.task.TaskList;
 
+/**
+ * Contains methods related to printing out values to the terminal screen.
+ */
 public class Ui {
-    private final static int WIDTH = 80;
-    private final static String DEMARCATOR = new String(new char[WIDTH]).replace("\0", "-");
-    private final static String MARVIN_HEADER =
+    private static final int WIDTH = 80;
+    private static final String DEMARCATOR = new String(new char[WIDTH]).replace("\0", "-");
+    private static final String MARVIN_HEADER =
             String.format("---%s says %s", Color.getColoredTextString("Marvin", Color.RED),
                     new String(new char[WIDTH - 14]).replace("\0", "-"));
-    private final static String USER_HEADER =
+    private static final String USER_HEADER =
             String.format("---%s replies %s", Color.getColoredTextString("User", Color.YELLOW),
                     new String(new char[WIDTH - 15]).replace("\0", "-"));
 

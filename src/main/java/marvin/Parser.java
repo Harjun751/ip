@@ -19,8 +19,11 @@ import marvin.task.Deadline;
 import marvin.task.Event;
 import marvin.task.Todo;
 
+/**
+ * Contains logic for parsing user input from the CLI.
+ */
 public class Parser {
-    private final static DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    private static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     /**
      * Parses an input and determines an action for the chatbot to run.
@@ -31,21 +34,21 @@ public class Parser {
     public static Command parse(String command) {
         String initial = command.split(" ")[0];
         return switch (initial) {
-            case "bye" -> new ExitCommand();
-            case "list" -> new ListTaskCommand();
-            case "deadline" -> new AddTaskCommand(
-                    parseDeadline(command)
-            );
-            case "event" -> new AddTaskCommand(
-                    parseEvent(command)
-            );
-            case "todo" -> new AddTaskCommand(
-                    parseTodo(command)
-            );
-            case "mark", "unmark" -> parseMarkTask(command);
-            case "delete" -> parseDeleteCommand(command);
-            case "find" -> parseFindCommand(command);
-            default -> new UnknownCommand();
+        case "bye" -> new ExitCommand();
+        case "list" -> new ListTaskCommand();
+        case "deadline" -> new AddTaskCommand(
+                parseDeadline(command)
+        );
+        case "event" -> new AddTaskCommand(
+                parseEvent(command)
+        );
+        case "todo" -> new AddTaskCommand(
+                parseTodo(command)
+        );
+        case "mark", "unmark" -> parseMarkTask(command);
+        case "delete" -> parseDeleteCommand(command);
+        case "find" -> parseFindCommand(command);
+        default -> new UnknownCommand();
         };
     }
 

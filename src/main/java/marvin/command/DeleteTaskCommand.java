@@ -4,9 +4,17 @@ import marvin.task.TaskList;
 import marvin.ui.Color;
 import marvin.ui.Ui;
 
+/**
+ * Contains logic for the delete command in Marvin.
+ */
 public class DeleteTaskCommand extends Command {
     private final int index;
 
+    /**
+     * Instantiate a delete task command.
+     *
+     * @param index The index of the task to be deleted.
+     */
     public DeleteTaskCommand(int index) {
         this.index = index;
     }

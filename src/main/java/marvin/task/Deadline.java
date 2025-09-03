@@ -3,9 +3,18 @@ package marvin.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A Deadline object that contains a task description with an additional due date.
+ */
 public class Deadline extends Task {
-    private LocalDateTime due;
+    private final LocalDateTime due;
 
+    /**
+     * Instantiates a deadline object.
+     *
+     * @param description The main description of the deadline.
+     * @param due The LocalDateTime object representing the due date of the task.
+     */
     public Deadline(String description, LocalDateTime due) {
         super(description);
         this.due = due;
@@ -15,7 +24,7 @@ public class Deadline extends Task {
     public String toString() {
         // Construct string based on description and status
         String mark;
-        if (this.getDone()) {
+        if (this.getIsDone()) {
             mark = "X";
         } else {
             mark = " ";

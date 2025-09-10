@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javafx.css.Match;
 import marvin.command.AddTaskCommand;
 import marvin.command.Command;
 import marvin.command.DeleteTaskCommand;
@@ -57,6 +56,7 @@ public class Parser {
     private static FindCommand parseFindCommand(String command) {
         validateCommand(command);
         String query = getUserInputParameter(command);
+        assert (!query.isEmpty()) : "Query shouldn't be empty.";
         return new FindCommand(query);
     }
 
@@ -69,6 +69,7 @@ public class Parser {
     private static MarkTaskCommand parseMarkTask(String command) {
         String[] parts = command.split(" ");
         validateCommand(command);
+        assert (parts[0].equals("mark") || parts[0].equals("unmark")) : "Task identifier has to be mark or unmark";
         boolean isMark = parts[0].equalsIgnoreCase("mark");
         int index = getIntegerFromUserInput(command);
         return new MarkTaskCommand(index - 1, isMark);

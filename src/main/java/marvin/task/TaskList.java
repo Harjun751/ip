@@ -21,6 +21,7 @@ public class TaskList implements Serializable {
      */
     public void addToList(Task task) {
         this.tasks.add(task);
+        assert (this.tasks.size() == count + 1) : "New Item not added to array!";
         count++;
     }
 
@@ -40,6 +41,7 @@ public class TaskList implements Serializable {
         }
         Task task = this.tasks.get(index);
         task.setIsDone(isDone);
+        assert (this.tasks.get(index).getIsDone() == isDone) : "Item not updated to correct isDone status";
         return task.toString();
     }
 
@@ -50,6 +52,7 @@ public class TaskList implements Serializable {
      * @throws ArrayIndexOutOfBoundsException If index supplied is not a valid index for a task.
      */
     public String removeTask(int index) {
+        int oldLength = count;
         // Throw error if index supplied is bigger than size
         // or bigger than the current count
         if (index >= count || index < 0) {
@@ -57,6 +60,7 @@ public class TaskList implements Serializable {
         }
         Task task = this.tasks.remove(index);
         count--;
+        assert (this.tasks.size() == oldLength - 1) : "Item not removed from array!";
         return task.toString();
     }
 

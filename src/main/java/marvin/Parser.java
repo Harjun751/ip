@@ -62,6 +62,7 @@ public class Parser {
             String[] queryArr = Arrays.stream(parts, 1, parts.length)
                     .toArray(String[]::new);
             String query = String.join(" ", queryArr);
+            assert (!query.isEmpty()) : "Query shouldn't be empty.";
             return new FindCommand(query);
         }
     }
@@ -93,6 +94,9 @@ public class Parser {
                     )
             );
         }
+
+        assert (parts[0].equals("mark") || parts[0].equals("unmark")) : "Task identifier has to be mark or unmark";
+
         boolean isMark = parts[0].equalsIgnoreCase("mark");
         int index;
         try {
@@ -124,8 +128,8 @@ public class Parser {
     }
 
     private static Deadline parseDeadline(String text) {
-        Pattern ptrn = Pattern.compile(" (.*) /by (.*)");
-        Matcher matcher = ptrn.matcher(text);
+        Pattern pattern = Pattern.compile(" (.*) /by (.*)");
+        Matcher matcher = pattern.matcher(text);
         try {
             if (matcher.find()) {
                 String description = matcher.group(1);

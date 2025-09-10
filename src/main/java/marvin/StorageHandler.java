@@ -46,6 +46,7 @@ public class StorageHandler {
             FileOutputStream fos = new FileOutputStream(FILE_PATH);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(taskList);
+            assert (new java.io.File(FILE_PATH).exists()) : "Save File should exist after writing to disk.";
         } catch (IOException e) {
             System.out.println("(failed to save data - data will not persist.)");
         }

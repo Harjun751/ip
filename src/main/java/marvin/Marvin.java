@@ -35,23 +35,24 @@ public class Marvin {
         boolean isExit = false;
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
+            // Attempt to parse command
+            String fullCommand;
             try {
-                String fullCommand = Ui.readCommand(sc);
-                Command c = Parser.parse(fullCommand);
-                CommandResult crs = c.execute(this.tasks);
-                crs.printResponse();
-                StorageHandler.storeTaskList(this.tasks); // save state
-                isExit = c.isExit();
-                if (isExit) {
-                    return;
-                }
+                fullCommand = Ui.readCommand(sc);
             } catch (MarvinException e) {
                 Ui.printGeneric(e.getMessage());
-            } finally {
-                if (!isExit) {
-                    Ui.printUserInput();
-                }
+                continue;
             }
+
+            Command c = Parser.parse(fullCommand);
+            CommandResult crs = c.execute(this.tasks);
+            crs.printResponse();
+            StorageHandler.storeTaskList(this.tasks); // save state
+            isExit = c.isExit();
+            if (isExit) {
+                return;
+            }
+            Ui.printUserInput();
         }
     }
 

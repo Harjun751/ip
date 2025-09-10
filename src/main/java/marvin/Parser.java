@@ -31,6 +31,7 @@ public class Parser {
      *
      * @param command The input from the user who desires to complete a task.
      * @return A Command object suitable to be executed to perform the task.
+     * @throws MarvinException Exception containing proper formatting for corrected command
      */
     public static Command parse(String command) {
         String initial = command.split(" ")[0];

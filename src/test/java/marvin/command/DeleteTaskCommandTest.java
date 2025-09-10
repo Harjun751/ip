@@ -1,6 +1,7 @@
 package marvin.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,7 @@ public class DeleteTaskCommandTest {
     @Test
     public void deleteTaskCommand_validCommand_deletesTask() {
         // Arrange
-        DeleteTaskCommand dtc = new DeleteTaskCommand(0);
+        DeleteTaskCommand dtc = new DeleteTaskCommand("1");
         TaskList tl = new TaskList();
         tl.addToList(new Todo("Test Todo"));
 
@@ -26,7 +27,7 @@ public class DeleteTaskCommandTest {
     @Test
     public void deleteTaskCommand_invalidCommand_doesNotDeleteTask() {
         // Arrange
-        DeleteTaskCommand dtc = new DeleteTaskCommand(1);
+        DeleteTaskCommand dtc = new DeleteTaskCommand("2");
         TaskList tl = new TaskList();
         tl.addToList(new Todo("Test Todo"));
 
@@ -36,5 +37,26 @@ public class DeleteTaskCommandTest {
         // Assert
         assertEquals(1, tl.getCount());
         assertEquals("1. [T][ ] Test Todo\n", tl.toString());
+    }
+
+    @Test
+    public void deleteTaskCommand_withSubtasks_deletesSubtask() {
+        // Arrange - create subtask
+        TaskList tl = new TaskList();
+        Todo first = new Todo("first");
+        Todo second = new Todo("second");
+        new AddTaskCommand(first).execute(tl);
+        new AddTaskCommand(second).execute(tl);
+        new DoAfterCommand("1", "2").execute(tl);
+
+        DeleteTaskCommand dtc = new DeleteTaskCommand("1.1");
+
+        // Act
+        dtc.execute(tl);
+
+        // Assert
+        assertEquals(1, tl.getCount());
+        assertTrue(first.getDependentTasks().isEmpty());
+        assertTrue(second.getDependentTasks().isEmpty());
     }
 }

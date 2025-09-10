@@ -1,5 +1,6 @@
 package marvin.command;
 
+import marvin.MarvinException;
 import marvin.task.TaskList;
 import marvin.ui.Color;
 import marvin.ui.Ui;
@@ -9,17 +10,17 @@ import marvin.ui.Ui;
  */
 public class MarkTaskCommand extends Command {
     private final boolean isDone;
-    private final int index;
+    private final String locator;
 
     /**
      * Instantiate a mark task command.
      *
-     * @param index  The index of the task to be marked.
+     * @param locator The string representation of where the task is.
      * @param isDone A boolean representing the state to mark the task as.
      */
-    public MarkTaskCommand(int index, boolean isDone) {
+    public MarkTaskCommand(String locator, boolean isDone) {
         this.isDone = isDone;
-        this.index = index;
+        this.locator = locator;
     }
 
 
@@ -28,12 +29,17 @@ public class MarkTaskCommand extends Command {
         String marked;
         // attempt to mark task
         try {
-            marked = taskList.markTask(this.index, this.isDone);
+            marked = taskList.markTask(this.locator, this.isDone);
         } catch (ArrayIndexOutOfBoundsException e) {
             // Return error text result
             return new CommandResult(() -> Ui.printGeneric("That task doesn't exist. Just like "
                     + Color.getColoredTextString("hope", Color.RED) + "."),
             "That task doesn't exist. Just like hope."
+            );
+        } catch (MarvinException e) {
+            // Return error text result
+            return new CommandResult(() -> Ui.printGeneric(e.getMessage()),
+                    e.getMessage()
             );
         }
 

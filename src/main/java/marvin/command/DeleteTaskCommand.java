@@ -8,15 +8,15 @@ import marvin.ui.Ui;
  * Contains logic for the delete command in Marvin.
  */
 public class DeleteTaskCommand extends Command {
-    private final int index;
+    private final String locator;
 
     /**
      * Instantiate a delete task command.
      *
-     * @param index The index of the task to be deleted.
+     * @param locator The string representation of where the task to be deleted is.
      */
-    public DeleteTaskCommand(int index) {
-        this.index = index;
+    public DeleteTaskCommand(String locator) {
+        this.locator = locator;
     }
 
     @Override
@@ -24,7 +24,7 @@ public class DeleteTaskCommand extends Command {
         // Remove the old task from the list
         String oldTask;
         try {
-            oldTask = taskList.removeTask(index);
+            oldTask = taskList.removeTask(locator);
         } catch (ArrayIndexOutOfBoundsException e) {
             // Return invalid text if out of bounds
             return new CommandResult(() -> Ui.printGeneric("That task doesn't exist. Just like "

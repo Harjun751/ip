@@ -1,6 +1,9 @@
 package marvin.task;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+
+import marvin.MarvinException;
 
 /**
  * An abstract task class that represents a task that Marvin can manage.
@@ -8,6 +11,8 @@ import java.io.Serializable;
 public abstract class Task implements Serializable {
     private final String description;
     private boolean isDone;
+    private Task parentTask;
+    private final ArrayList<Task> dependentTasks;
 
     /**
      * Instantiates a task that is not done.
@@ -17,6 +22,8 @@ public abstract class Task implements Serializable {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.parentTask = null;
+        this.dependentTasks = new ArrayList<>();
     }
 
     /**
@@ -28,6 +35,48 @@ public abstract class Task implements Serializable {
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
+        this.parentTask = null;
+        this.dependentTasks = new ArrayList<>();
+    }
+
+    public Task getParentTask() {
+        return this.parentTask;
+    }
+
+    /**
+     * Sets a task to be done after another task.
+     *
+     * @param child The task to be completed after
+     */
+    public void setChildTask(Task child) {
+        if (child.parentTask != null) {
+            throw new MarvinException("You cannot set a dependency for a task that already relies on another task.");
+        } else {
+            Task grandFather = this;
+            while (grandFather.parentTask != null) {
+                grandFather = grandFather.parentTask;
+            }
+            if (grandFather.equals(child)) {
+                throw new MarvinException("Circular dependencies are not allowed.");
+            }
+        }
+
+        // Carry on
+        child.parentTask = this;
+        this.dependentTasks.add(child);
+    }
+
+    public ArrayList<Task> getDependentTasks() {
+        return this.dependentTasks;
+    }
+
+    /**
+     * Unlinks a task that was set to be done-after another task.
+     */
+    public void unlinkParent() {
+        if (this.parentTask != null) {
+            this.parentTask.dependentTasks.remove(this);
+        }
     }
 
     /**

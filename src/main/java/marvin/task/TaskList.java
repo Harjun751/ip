@@ -3,12 +3,14 @@ package marvin.task;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import marvin.MarvinException;
+
 /**
  * Contains the logic for managing the overall task list for Marvin.
  */
 public class TaskList implements Serializable {
     private final ArrayList<Task> tasks;
-
+    private int size = 0;
     public TaskList() {
         this.tasks = new ArrayList<Task>();
     }
@@ -20,28 +22,28 @@ public class TaskList implements Serializable {
      */
     public void addToList(Task task) {
         this.tasks.add(task);
+        this.size++;
         assert (this.tasks.contains(task)) : "New Item not added to array!";
     }
 
     /**
      * Marks a task at a given index as the supplied done state.
      *
-     * @param index  The index at which the desired task object resides.
+     * @param locator A string representation of the location of the task e.g. 1.12.4
      * @param isDone The state at which to set the task object.
      * @return The string representation of the object after the operation is complete.
      * @throws ArrayIndexOutOfBoundsException If index supplied is not a valid index for a task.
      */
-    public String markTask(int index, boolean isDone) {
-        // Throw error if index supplied is bigger than size
-        // or bigger than the current count
-        if (index >= this.tasks.size() || index < 0) {
-            throw new ArrayIndexOutOfBoundsException("Invalid index");
-        }
-
+    public String markTask(String locator, boolean isDone) {
         // Perform mark
-        Task task = this.tasks.get(index);
+        Task task = searchForTask(locator);
+
+        Task parent = task.getParentTask();
+        if (parent != null && !parent.getIsDone()) {
+            throw new MarvinException("You have to complete the previous task first.");
+        }
         task.setIsDone(isDone);
-        assert (this.tasks.get(index).getIsDone() == isDone) : "Item not updated to correct isDone status";
+        assert (searchForTask(locator).getIsDone() == isDone) : "Item not updated to correct isDone status";
         return task.toString();
     }
 
@@ -51,17 +53,12 @@ public class TaskList implements Serializable {
      * @return The string representation of the object deleted.
      * @throws ArrayIndexOutOfBoundsException If index supplied is not a valid index for a task.
      */
-    public String removeTask(int index) {
-        int oldLength = this.tasks.size();
-        // Throw error if index supplied is bigger than size
-        // or bigger than the current count
-        if (index >= this.tasks.size() || index < 0) {
-            throw new ArrayIndexOutOfBoundsException("Invalid index");
-        }
-
-        // Remove the task
-        Task task = this.tasks.remove(index);
-        assert (this.tasks.size() == oldLength - 1) : "Item not removed from array!";
+    public String removeTask(String locator) {
+        Task task = this.searchForTask(locator);
+        this.tasks.remove(task);
+        task.unlinkParent();
+        this.size--;
+        assert (!this.tasks.contains(task)) : "Item not removed from array!";
         return task.toString();
     }
 
@@ -83,12 +80,25 @@ public class TaskList implements Serializable {
     }
 
     /**
+     * Sets a task to be dependent on another task's completion
+     *
+     * @param parentLocator The string representation of where the task that has to be completed first is
+     * @param subTaskLocator The string representation of where the task that can be completed after is
+     */
+    public void setTaskToDoAfter(String parentLocator, String subTaskLocator) {
+        Task parent = this.searchForTask(parentLocator);
+        Task subTask = this.searchForTask(subTaskLocator);
+        parent.setChildTask(subTask);
+        this.tasks.remove(subTask);
+    }
+
+    /**
      * Returns the count of objects in the task list.
      *
      * @return How many objects are in the list.
      */
     public int getCount() {
-        return this.tasks.size();
+        return this.size;
     }
 
     /**
@@ -100,7 +110,42 @@ public class TaskList implements Serializable {
         for (int i = 0; i < this.tasks.size(); i++) {
             // i. [task string] \n
             sb.append(i + 1).append(". ").append(this.tasks.get(i)).append("\n");
+            recursePrintChild(String.valueOf(i + 1), 2, this.tasks.get(i), sb);
         }
         return sb.toString();
+    }
+
+    private void recursePrintChild(String preamp, int indentation, Task toPrint, StringBuilder sb) {
+        for (int i = 0; i < toPrint.getDependentTasks().size(); i++) {
+            Task child = toPrint.getDependentTasks().get(i);
+            sb.append(" ".repeat(indentation)).append("---->")
+                    .append(preamp).append(".").append(i + 1).append(" ").append(child).append("\n");
+
+
+            recursePrintChild(preamp + "." + (i + 1), indentation + 2, child, sb);
+        }
+    }
+
+    private Task searchForTask(String input) {
+        // assume input is in 1.1.1.1
+        ArrayList<Task> currentListToSearch = this.tasks;
+        Task task = null;
+        String[] parts = input.split("\\.");
+        for (String part : parts) {
+            int index;
+            try {
+                index = Integer.parseInt(part);
+            } catch (NumberFormatException e) {
+                throw new MarvinException("Bad number format");
+            }
+
+            try {
+                task = currentListToSearch.get(index - 1);
+            } catch (IndexOutOfBoundsException e) {
+                throw new ArrayIndexOutOfBoundsException();
+            }
+            currentListToSearch = task.getDependentTasks();
+        }
+        return task;
     }
 }

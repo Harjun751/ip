@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import marvin.command.AddTaskCommand;
 import marvin.command.Command;
 import marvin.command.DeleteTaskCommand;
+import marvin.command.DoAfterCommand;
 import marvin.command.ExitCommand;
 import marvin.command.FindCommand;
 import marvin.command.ListTaskCommand;
@@ -49,6 +50,7 @@ public class Parser {
         case "mark", "unmark" -> parseMarkTask(command);
         case "delete" -> parseDeleteCommand(command);
         case "find" -> parseFindCommand(command);
+        case "do" -> parseDoAfterCommand(command);
         default -> new UnknownCommand();
         };
     }
@@ -61,18 +63,39 @@ public class Parser {
     }
 
     private static DeleteTaskCommand parseDeleteCommand(String command) {
+        MarvinException formatError = new MarvinException(
+                Personality.getInvalidFormatText("delete [index]")
+        );
+
         validateCommand(command);
-        int index = getIntegerFromUserInput(command);
-        return new DeleteTaskCommand(index - 1);
+        String locator = getLocatorFromUserInput(command, 1, formatError);
+        return new DeleteTaskCommand(locator);
     }
 
     private static MarkTaskCommand parseMarkTask(String command) {
+        MarvinException formatError = new MarvinException(
+                Personality.getInvalidFormatText("mark/unmark [index]")
+        );
+
         String[] parts = command.split(" ");
         validateCommand(command);
         assert (parts[0].equals("mark") || parts[0].equals("unmark")) : "Task identifier has to be mark or unmark";
         boolean isMark = parts[0].equalsIgnoreCase("mark");
-        int index = getIntegerFromUserInput(command);
-        return new MarkTaskCommand(index - 1, isMark);
+        String locator = getLocatorFromUserInput(command, 1, formatError);
+        return new MarkTaskCommand(locator, isMark);
+    }
+
+    private static DoAfterCommand parseDoAfterCommand(String command) {
+        MarvinException formatError = new MarvinException(
+                Personality.getInvalidFormatText("do [index] /after [index]")
+        );
+
+        validateCommand(command);
+        // Command follows "do 1 /after 2"
+        // so 1 pos contains input 1, and 3 pos contains input 2
+        String parentLocator = getLocatorFromUserInput(command, 3, formatError);
+        String subTaskLocator = getLocatorFromUserInput(command, 1, formatError);
+        return new DoAfterCommand(parentLocator, subTaskLocator);
     }
 
     private static Todo parseTodo(String text) {
@@ -143,24 +166,16 @@ public class Parser {
     }
 
     /**
-     * Parses Integer in position 2 of user input
+     * Parses the resource locator in a given position
      * Example input: "find 1"
      * Return: 1
      *
      * @param command The full-text user command
      */
-    private static int getIntegerFromUserInput(String command) {
+    private static String getLocatorFromUserInput(String command, int position, MarvinException formatError) {
+        // do we still need this?
         String[] parts = command.split(" ");
-        int index;
-        try {
-            index = Integer.parseInt(parts[1]);
-        } catch (NumberFormatException e) {
-            throw new MarvinException(
-                    Personality.getInvalidFormatText("delete [index]")
-            );
-        }
-
-        return index;
+        return parts[position];
     }
 
     private static Matcher matchUserInput(Pattern pattern, String command, MarvinException formatError) {

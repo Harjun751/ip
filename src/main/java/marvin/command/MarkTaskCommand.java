@@ -25,15 +25,20 @@ public class MarkTaskCommand extends Command {
 
     @Override
     public CommandResult execute(TaskList taskList) {
+        String marked;
+        // attempt to mark task
         try {
-            String marked = taskList.markTask(this.index, this.isDone);
-            String reply = "Fine, done.\n" + marked;
-            return new CommandResult(() -> Ui.printGeneric(reply), reply);
+            marked = taskList.markTask(this.index, this.isDone);
         } catch (ArrayIndexOutOfBoundsException e) {
+            // Return error text result
             return new CommandResult(() -> Ui.printGeneric("That task doesn't exist. Just like "
-                            + Color.getColoredTextString("hope", Color.RED) + "."),
-                    "That task doesn't exist. Just like hope."
+                    + Color.getColoredTextString("hope", Color.RED) + "."),
+            "That task doesn't exist. Just like hope."
             );
         }
+
+        // Return success text
+        String reply = "Fine, done.\n" + marked;
+        return new CommandResult(() -> Ui.printGeneric(reply), reply);
     }
 }

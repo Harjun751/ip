@@ -21,16 +21,21 @@ public class DeleteTaskCommand extends Command {
 
     @Override
     public CommandResult execute(TaskList taskList) {
+        // Remove the old task from the list
+        String oldTask;
         try {
-            String oldTask = taskList.removeTask(index);
-            String reply = "I've removed the task.\n" + oldTask + "\nNow you have " + taskList.getCount()
-                    + " tasks and absolutely nothing will change.";
-            return new CommandResult(() -> Ui.printGeneric(reply), reply);
+            oldTask = taskList.removeTask(index);
         } catch (ArrayIndexOutOfBoundsException e) {
+            // Return invalid text if out of bounds
             return new CommandResult(() -> Ui.printGeneric("That task doesn't exist. Just like "
                             + Color.getColoredTextString("hope", Color.RED) + "."),
                     "That task doesn't exist. Just like hope."
             );
         }
+
+        // Return the removed text
+        String reply = "I've removed the task.\n" + oldTask + "\nNow you have " + taskList.getCount()
+                + " tasks and absolutely nothing will change.";
+        return new CommandResult(() -> Ui.printGeneric(reply), reply);
     }
 }

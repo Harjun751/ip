@@ -8,6 +8,8 @@ public enum Color {
     RED("\u001B[31m"),
     YELLOW("\u001B[33m");
 
+    private static final String RESET_TEXT_COLOR_SEQUENCE = "\u001B[0m";
+
     public final String sequence;
 
     Color(String sequence) {
@@ -21,6 +23,6 @@ public enum Color {
      * @param color The color that the text is desired to be printed in.
      */
     public static String getColoredTextString(String text, Color color) {
-        return color.sequence + text + "\u001B[0m";
+        return color.sequence + text + RESET_TEXT_COLOR_SEQUENCE;
     }
 }

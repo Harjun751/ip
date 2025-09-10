@@ -8,7 +8,6 @@ import java.util.ArrayList;
  */
 public class TaskList implements Serializable {
     private final ArrayList<Task> tasks;
-    private int count = 0;
 
     public TaskList() {
         this.tasks = new ArrayList<Task>();
@@ -21,8 +20,7 @@ public class TaskList implements Serializable {
      */
     public void addToList(Task task) {
         this.tasks.add(task);
-        assert (this.tasks.size() == count + 1) : "New Item not added to array!";
-        count++;
+        assert (this.tasks.contains(task)) : "New Item not added to array!";
     }
 
     /**
@@ -36,9 +34,11 @@ public class TaskList implements Serializable {
     public String markTask(int index, boolean isDone) {
         // Throw error if index supplied is bigger than size
         // or bigger than the current count
-        if (index >= count || index < 0) {
+        if (index >= this.tasks.size() || index < 0) {
             throw new ArrayIndexOutOfBoundsException("Invalid index");
         }
+
+        // Perform mark
         Task task = this.tasks.get(index);
         task.setIsDone(isDone);
         assert (this.tasks.get(index).getIsDone() == isDone) : "Item not updated to correct isDone status";
@@ -52,14 +52,15 @@ public class TaskList implements Serializable {
      * @throws ArrayIndexOutOfBoundsException If index supplied is not a valid index for a task.
      */
     public String removeTask(int index) {
-        int oldLength = count;
+        int oldLength = this.tasks.size();
         // Throw error if index supplied is bigger than size
         // or bigger than the current count
-        if (index >= count || index < 0) {
+        if (index >= this.tasks.size() || index < 0) {
             throw new ArrayIndexOutOfBoundsException("Invalid index");
         }
+
+        // Remove the task
         Task task = this.tasks.remove(index);
-        count--;
         assert (this.tasks.size() == oldLength - 1) : "Item not removed from array!";
         return task.toString();
     }
@@ -72,12 +73,10 @@ public class TaskList implements Serializable {
      */
     public String searchTasks(String query) {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < this.tasks.size(); i++) {
             if (this.tasks.get(i).getDescription().contains(query)) {
-                sb.append(i + 1);
-                sb.append(". ");
-                sb.append(this.tasks.get(i));
-                sb.append("\n");
+                // i. [task string] \n
+                sb.append(i + 1).append(". ").append(this.tasks.get(i)).append("\n");
             }
         }
         return sb.toString();
@@ -89,7 +88,7 @@ public class TaskList implements Serializable {
      * @return How many objects are in the list.
      */
     public int getCount() {
-        return this.count;
+        return this.tasks.size();
     }
 
     /**
@@ -98,11 +97,9 @@ public class TaskList implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < count; i++) {
-            sb.append(i + 1);
-            sb.append(". ");
-            sb.append(this.tasks.get(i));
-            sb.append("\n");
+        for (int i = 0; i < this.tasks.size(); i++) {
+            // i. [task string] \n
+            sb.append(i + 1).append(". ").append(this.tasks.get(i)).append("\n");
         }
         return sb.toString();
     }

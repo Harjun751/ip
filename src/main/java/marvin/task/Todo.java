@@ -27,12 +27,6 @@ public class Todo extends Task {
     @Override
     public String toString() {
         // Construct string based on description and status
-        String mark;
-        if (this.getIsDone()) {
-            mark = "X";
-        } else {
-            mark = " ";
-        }
-        return String.format("[T][%s] %s", mark, this.getDescription());
+        return String.format("[T]%s %s", super.toString(), this.getDescription());
     }
 }

@@ -30,6 +30,7 @@ public class Parser {
      *
      * @param command The input from the user who desires to complete a task.
      * @return A Command object suitable to be executed to perform the task.
+     * @throws MarvinException Exception containing proper formatting for corrected command
      */
     public static Command parse(String command) {
         String initial = command.split(" ")[0];
@@ -53,127 +54,134 @@ public class Parser {
     }
 
     private static FindCommand parseFindCommand(String command) {
-        String[] parts = command.split(" ");
-        if (parts.length < 2) {
-            throw new MarvinException(
-                    Personality.getInvalidFormatText("find [query]")
-            );
-        } else {
-            String[] queryArr = Arrays.stream(parts, 1, parts.length)
-                    .toArray(String[]::new);
-            String query = String.join(" ", queryArr);
-            assert (!query.isEmpty()) : "Query shouldn't be empty.";
-            return new FindCommand(query);
-        }
+        validateCommand(command);
+        String query = getUserInputParameter(command);
+        assert (!query.isEmpty()) : "Query shouldn't be empty.";
+        return new FindCommand(query);
     }
 
     private static DeleteTaskCommand parseDeleteCommand(String command) {
-        String[] parts = command.split(" ");
-        if (parts.length < 2) {
-            throw new MarvinException(
-                    Personality.getInvalidFormatText("delete [index]")
-            );
-        }
-        int index;
-        try {
-            index = Integer.parseInt(parts[1]);
-        } catch (NumberFormatException e) {
-            throw new MarvinException(
-                    Personality.getInvalidFormatText("delete [index]")
-            );
-        }
+        validateCommand(command);
+        int index = getIntegerFromUserInput(command);
         return new DeleteTaskCommand(index - 1);
     }
 
     private static MarkTaskCommand parseMarkTask(String command) {
         String[] parts = command.split(" ");
-        if (parts.length < 2) {
-            throw new MarvinException(
-                    Personality.getInvalidFormatText(
-                            "mark/unmark [index]"
-                    )
-            );
-        }
-
+        validateCommand(command);
         assert (parts[0].equals("mark") || parts[0].equals("unmark")) : "Task identifier has to be mark or unmark";
-
         boolean isMark = parts[0].equalsIgnoreCase("mark");
-        int index;
-        try {
-            index = Integer.parseInt(parts[1]);
-        } catch (NumberFormatException e) {
-            throw new MarvinException(
-                    Personality.getInvalidFormatText(
-                            "mark/unmark [index]"
-                    )
-            );
-        }
+        int index = getIntegerFromUserInput(command);
         return new MarkTaskCommand(index - 1, isMark);
     }
 
     private static Todo parseTodo(String text) {
-        String[] parts = text.split(" ");
+        validateCommand(text);
+        String name = getUserInputParameter(text);
+        return new Todo(name);
+    }
+
+    private static Deadline parseDeadline(String text) {
+        MarvinException formatError = new MarvinException(
+                Personality.getInvalidFormatText("deadline [name] /by dd/MM/yyyy hhmm")
+        );
+
+        // Use Regex to extract multi-part user input
+        Matcher matcher = matchUserInput(
+                Pattern.compile(" (.*) /by (.*)"),
+                text,
+                formatError
+        );
+
+        String description = matcher.group(1);
+        LocalDateTime dueDate = parseDateFromString(matcher.group(2), formatError);
+
+        return new Deadline(description, dueDate);
+    }
+
+    private static Event parseEvent(String text) {
+        MarvinException formatError = new MarvinException(
+                Personality.getInvalidFormatText("event [name] /from dd/MM/yyyy hhmm /to dd/MM/yyyy hhmm")
+        );
+
+        Matcher matcher = matchUserInput(
+                Pattern.compile(" (.*) /from (.*) /to (.*)"),
+                text,
+                formatError
+        );
+
+        String description = matcher.group(1);
+        LocalDateTime fromDate = parseDateFromString(matcher.group(2), formatError);
+        LocalDateTime toDate = parseDateFromString(matcher.group(3), formatError);
+
+        return new Event(description, fromDate, toDate);
+    }
+
+    private static void validateCommand(String command) {
+        String[] parts = command.split(" ");
         if (parts.length < 2) {
             throw new MarvinException(
                     Personality.getInvalidFormatText(
                             "todo [name]"
                     )
             );
-        } else {
-            String[] nameArr = Arrays.stream(parts, 1, parts.length)
-                    .toArray(String[]::new);
-            String name = String.join(" ", nameArr);
-            return new Todo(name);
         }
     }
 
-    private static Deadline parseDeadline(String text) {
-        Pattern pattern = Pattern.compile(" (.*) /by (.*)");
-        Matcher matcher = pattern.matcher(text);
-        try {
-            if (matcher.find()) {
-                String description = matcher.group(1);
-                String due = matcher.group(2);
-                LocalDateTime dueDate = LocalDateTime.parse(
-                        due,
-                        FORMAT
-                );
-                return new Deadline(description, dueDate);
-            } else {
-                throw new IllegalStateException();
-            }
-        } catch (DateTimeParseException | IllegalStateException e) {
-            throw new MarvinException(
-                    Personality.getInvalidFormatText("deadline [name] /by dd/MM/yyyy hhmm")
-            );
-        }
+    /**
+     * Parses user query after position 1
+     * Example input: "find my very long query"
+     * Return: "my very long query"
+     *
+     * @param command The full-text user command
+     */
+    private static String getUserInputParameter(String command) {
+        String[] parts = command.split(" ");
+        String[] nameArr = Arrays.stream(parts, 1, parts.length)
+                .toArray(String[]::new);
+        return String.join(" ", nameArr);
     }
 
-    private static Event parseEvent(String text) {
-        Pattern ptrn = Pattern.compile(" (.*) /from (.*) /to (.*)");
-        Matcher matcher = ptrn.matcher(text);
+    /**
+     * Parses Integer in position 2 of user input
+     * Example input: "find 1"
+     * Return: 1
+     *
+     * @param command The full-text user command
+     */
+    private static int getIntegerFromUserInput(String command) {
+        String[] parts = command.split(" ");
+        int index;
         try {
-            if (matcher.find()) {
-                String description = matcher.group(1);
-                String from = matcher.group(2);
-                LocalDateTime fromDate = LocalDateTime.parse(
-                        from,
-                        FORMAT
-                );
-                String to = matcher.group(3);
-                LocalDateTime toDate = LocalDateTime.parse(
-                        to,
-                        FORMAT
-                );
-                return new Event(description, fromDate, toDate);
-            } else {
-                throw new IllegalStateException();
-            }
-        } catch (DateTimeParseException | IllegalStateException e) {
+            index = Integer.parseInt(parts[1]);
+        } catch (NumberFormatException e) {
             throw new MarvinException(
-                    Personality
-                            .getInvalidFormatText("event [name] /from dd/MM/yyyy hhmm /to dd/MM/yyyy hhmm")
+                    Personality.getInvalidFormatText("delete [index]")
             );
         }
+
+        return index;
+    }
+
+    private static Matcher matchUserInput(Pattern pattern, String command, MarvinException formatError) {
+        Matcher matcher = pattern.matcher(command);
+        if (!matcher.find()) {
+            throw formatError;
+        }
+        return matcher;
+    }
+
+    private static LocalDateTime parseDateFromString(String input, MarvinException formatError) {
+        LocalDateTime date;
+        try {
+            date = LocalDateTime.parse(
+                    input,
+                    FORMAT
+            );
+        } catch (DateTimeParseException e) {
+            throw formatError;
+        }
+
+        return date;
     }
 }

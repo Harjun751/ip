@@ -23,13 +23,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         // Construct string based on description and status
-        String mark;
-        if (this.getIsDone()) {
-            mark = "X";
-        } else {
-            mark = " ";
-        }
-        return String.format("[D][%s] %s (by: %s)", mark, this.getDescription(),
+        return String.format("[D]%s %s (by: %s)", super.toString(), this.getDescription(),
                 this.dueTime.format(DateTimeFormatter.ofPattern(
                         "dd-MM-yyyy, ha"
                 ))

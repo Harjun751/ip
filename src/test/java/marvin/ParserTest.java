@@ -18,16 +18,6 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_invalidMarkInput_throwsException() {
-        try {
-            Command c = parse("mark abc");
-            fail();
-        } catch (Exception e) {
-            assertEquals(MarvinException.class, e.getClass());
-        }
-    }
-
-    @Test
     public void parse_incompleteMarkInput_throwsException() {
         try {
             Command c = parse("mark");

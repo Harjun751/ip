@@ -26,13 +26,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         // Construct string based on description and status
-        String mark;
-        if (this.getIsDone()) {
-            mark = "X";
-        } else {
-            mark = " ";
-        }
-        return String.format("[E][%s] %s (from: %s to: %s)", mark, this.getDescription(),
+        return String.format("[E] %s %s (from: %s to: %s)", super.toString(), this.getDescription(),
                 this.startTime.format(DateTimeFormatter.ofPattern(
                         "dd-MM-yyyy, ha"
                 )),

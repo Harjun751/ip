@@ -54,6 +54,15 @@ public abstract class Task implements Serializable {
         this.isDone = isDone;
     }
 
+    /**
+     * A representation of a task's doneness state.
+     * Task is abstract and can never be instantiated. This method
+     * is used to keep the doneness representation uniform among all
+     * subclasses.
+     */
     @Override
-    public abstract String toString();
+    public String toString() {
+        String mark = this.getIsDone() ? "X" : " ";
+        return String.format("[%s]", mark);
+    };
 }

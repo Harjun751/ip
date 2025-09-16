@@ -63,6 +63,7 @@ public class Marvin {
         try {
             Command c = Parser.parse(input);
             CommandResult crs = c.execute(this.tasks);
+            StorageHandler.storeTaskList(this.tasks); // save state
             return crs.getMessage();
         } catch (MarvinException e) {
             return e.getMessage();

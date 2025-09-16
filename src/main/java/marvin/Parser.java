@@ -95,10 +95,16 @@ public class Parser {
         );
 
         validateCommand(command, formatError);
-        // Command follows "do 1 /after 2"
-        // so 1 pos contains input 1, and 3 pos contains input 2
-        String parentLocator = getLocatorFromUserInput(command, 3, formatError);
-        String subTaskLocator = getLocatorFromUserInput(command, 1, formatError);
+
+        // Use Regex to extract multi-part user input
+        Matcher matcher = matchUserInput(
+                Pattern.compile(" (.*) /after (.*)"),
+                command,
+                formatError
+        );
+        String parentLocator = matcher.group(2);
+        String subTaskLocator = matcher.group(1);
+
         return new DoAfterCommand(parentLocator, subTaskLocator);
     }
 

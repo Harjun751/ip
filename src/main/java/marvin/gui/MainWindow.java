@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import marvin.Marvin;
+import marvin.StorageHandler;
 
 /**
  * Controller for the main GUI.

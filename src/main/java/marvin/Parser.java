@@ -56,7 +56,11 @@ public class Parser {
     }
 
     private static FindCommand parseFindCommand(String command) {
-        validateCommand(command);
+        MarvinException formatError = new MarvinException(
+                Personality.getInvalidFormatText("find [query]")
+        );
+
+        validateCommand(command, formatError);
         String query = getUserInputParameter(command);
         assert (!query.isEmpty()) : "Query shouldn't be empty.";
         return new FindCommand(query);
@@ -67,7 +71,7 @@ public class Parser {
                 Personality.getInvalidFormatText("delete [index]")
         );
 
-        validateCommand(command);
+        validateCommand(command, formatError);
         String locator = getLocatorFromUserInput(command, 1, formatError);
         return new DeleteTaskCommand(locator);
     }
@@ -78,7 +82,7 @@ public class Parser {
         );
 
         String[] parts = command.split(" ");
-        validateCommand(command);
+        validateCommand(command, formatError);
         assert (parts[0].equals("mark") || parts[0].equals("unmark")) : "Task identifier has to be mark or unmark";
         boolean isMark = parts[0].equalsIgnoreCase("mark");
         String locator = getLocatorFromUserInput(command, 1, formatError);
@@ -90,7 +94,7 @@ public class Parser {
                 Personality.getInvalidFormatText("do [index] /after [index]")
         );
 
-        validateCommand(command);
+        validateCommand(command, formatError);
         // Command follows "do 1 /after 2"
         // so 1 pos contains input 1, and 3 pos contains input 2
         String parentLocator = getLocatorFromUserInput(command, 3, formatError);
@@ -99,7 +103,11 @@ public class Parser {
     }
 
     private static Todo parseTodo(String text) {
-        validateCommand(text);
+        MarvinException formatError = new MarvinException(
+                Personality.getInvalidFormatText("todo [name]")
+        );
+
+        validateCommand(text, formatError);
         String name = getUserInputParameter(text);
         return new Todo(name);
     }
@@ -140,14 +148,10 @@ public class Parser {
         return new Event(description, fromDate, toDate);
     }
 
-    private static void validateCommand(String command) {
+    private static void validateCommand(String command, MarvinException formatError) {
         String[] parts = command.split(" ");
         if (parts.length < 2) {
-            throw new MarvinException(
-                    Personality.getInvalidFormatText(
-                            "todo [name]"
-                    )
-            );
+            throw formatError;
         }
     }
 

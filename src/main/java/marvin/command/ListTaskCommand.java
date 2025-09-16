@@ -11,7 +11,7 @@ public class ListTaskCommand extends Command {
     @Override
     public CommandResult execute(TaskList taskList) {
         return new CommandResult(() -> Ui.printTaskList(taskList, Personality.getTaskIntro()),
-                taskList + Personality.getTaskIntroColorless()
+                 Personality.getTaskIntroColorless() + taskList
         );
     }
 }

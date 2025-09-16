@@ -2,26 +2,30 @@ package marvin.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import marvin.Marvin;
 
 /**
  * Controller for the main GUI.
  */
 public class MainWindow {
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private final Image marvinImage = new Image(this.getClass().getResourceAsStream("/images/marvin.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user-64.png"));
+    private final Image marvinImage = new Image(this.getClass().getResourceAsStream("/images/marvin-64.png"));
+
+    @FXML
+    private ImageView titleImage;
     @FXML
     private ScrollPane scrollPane;
     @FXML
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
     private Marvin marvin;
 
     /**
@@ -32,6 +36,10 @@ public class MainWindow {
     public void initialize() {
         // bind vbox height to scrollpane vvalue, so it scrolls down once the dialog container gets bigger.
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        // Load a font
+        Font.loadFont(Main.class.getResource("/fonts/Red_Hat_Mono/static/RedHatMono-Bold.ttf").toExternalForm(), 32);
+        Font.loadFont(Main.class.getResource("/fonts/Red_Hat_Mono/static/RedHatMono-Regular.ttf").toExternalForm(), 16);
+        titleImage.setImage(marvinImage);
     }
 
     /**

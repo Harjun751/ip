@@ -1,20 +1,24 @@
 .label {
-    -fx-background-color: linear-gradient(to bottom right, #403F3F, black);
-    -fx-border-color: #53d93c;
-    -fx-border-width: 2px;
-    -fx-background-radius: 1em 1em 0 1em;
-    -fx-border-radius: 1em 1em 0 1em;
+    -fx-background-color: #4C4C4C;
+
+    -fx-border-radius: 10px 10px 0 10px;
+    -fx-background-radius: 10px 10px 0 10px;
+
     -fx-text-fill: white;
+    -fx-font-family: "Red Hat Mono";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+
+     -fx-effect: dropshadow(gaussian, rgba(255,255,255,0.2), 20, 0.5, 2, 1);
 }
 
 .reply-label {
-    -fx-background-radius: 1em 1em 1em 0;
-    -fx-border-radius: 1em 1em 1em 0;
+    -fx-border-radius: 10px 10px 10px 0;
+    -fx-background-radius: 10px 10px 10px 0;
+    -fx-effect: dropshadow(gaussian, rgba(255,255,255,0.2), 20, 0.5, -2, 1);
 }
 
 #displayPicture {
-    /* Shadow effect on image. */
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 5, 5);
 
     /* Change size of image. */
     -fx-scale-x: 1;

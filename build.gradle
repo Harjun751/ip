@@ -68,3 +68,12 @@ run{
     standardInput = System.in
     enableAssertions = true
 }
+
+tasks.register('cliJar', Jar) {
+    archiveBaseName.set("marvin-cli")
+    manifest {
+        attributes 'Main-Class': 'marvin.Marvin'
+    }
+    from sourceSets.main.output
+    dependsOn configurations.runtimeClasspath
+}

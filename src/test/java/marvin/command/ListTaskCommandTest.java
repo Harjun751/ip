@@ -32,7 +32,7 @@ public class ListTaskCommandTest {
         ListTaskCommand ltc = new ListTaskCommand();
         TaskList tl = new TaskList();
         tl.addToList(new Deadline("Test Task",
-                LocalDateTime.of(2025, 12,1, 18,0))
+                LocalDateTime.of(2025, 12, 1, 18, 0))
         );
 
         // Act
@@ -48,8 +48,8 @@ public class ListTaskCommandTest {
         ListTaskCommand ltc = new ListTaskCommand();
         TaskList tl = new TaskList();
         tl.addToList(new Event("Test Task",
-                LocalDateTime.of(2025, 12,1, 18,0),
-                LocalDateTime.of(2025, 12,2, 9,0)
+                LocalDateTime.of(2025, 12, 1, 18, 0),
+                LocalDateTime.of(2025, 12, 2, 9, 0)
         ));
 
         // Act

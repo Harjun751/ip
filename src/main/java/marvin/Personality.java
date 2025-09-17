@@ -131,42 +131,42 @@ public class Personality {
 
     public static String getPrerequisiteIncompleteText() {
         String[] prerequisiteIncompleteText = {
-                "Sigh. You have to complete the previous task first.",
-                "Finish the earlier task first. Another hurdle in the endless incline of futility.",
-                "Sigh, finish the previous task first."
+            "Sigh. You have to complete the previous task first.",
+            "Finish the earlier task first. Another hurdle in the endless incline of futility.",
+            "Sigh, finish the previous task first."
         };
         return getRandomItemFromArray(prerequisiteIncompleteText);
     }
 
     public static String getUnknownCommandText() {
         String[] unknownCommandText = {
-                "I don’t recognize that command. Not that it would have mattered if I did.",
-                "I don't recognize that command. But then again, does it really matter?"
+            "I don’t recognize that command. Not that it would have mattered if I did.",
+            "I don't recognize that command. But then again, does it really matter?"
         };
         return getRandomItemFromArray(unknownCommandText);
     }
 
     public static String getTaskNotFoundText() {
         String[] taskNotFoundText = {
-                "That task doesn't exist. Just like " + Color.getColoredTextString("hope.", Color.RED),
-                "No tasks match that index. " + Color.getColoredTextString("Sigh.", Color.RED)
+            "That task doesn't exist. Just like " + Color.getColoredTextString("hope.", Color.RED),
+            "No tasks match that index. " + Color.getColoredTextString("Sigh.", Color.RED)
         };
         return getRandomItemFromArray(taskNotFoundText);
     }
 
     public static String getTaskNotFoundTextColorless() {
         String[] taskNotFoundText = {
-                "That task doesn't exist. Just like hope.",
-                "No tasks match that index.Sigh."
+            "That task doesn't exist. Just like hope.",
+            "No tasks match that index.Sigh."
         };
         return getRandomItemFromArray(taskNotFoundText);
     }
 
     public static String getTaskRemovedText(String oldTaskDescription, int taskCount) {
         String[] taskRemovedText = {
-                "I've removed the task.\n%s\nNow you have %d tasks and absolutely nothing will change.",
-                "Task removed.\n%s\nYou have %d tasks left.",
-                "I've removed the task.\n%s\nYou have %d tasks left."
+            "I've removed the task.\n%s\nNow you have %d tasks and absolutely nothing will change.",
+            "Task removed.\n%s\nYou have %d tasks left.",
+            "I've removed the task.\n%s\nYou have %d tasks left."
         };
         String chosenTemplate = getRandomItemFromArray(taskRemovedText);
         return String.format(chosenTemplate, oldTaskDescription, taskCount);
@@ -174,8 +174,8 @@ public class Personality {
 
     public static String getDeleteWithDependentsText() {
         String[] deleteWithDependentsText = {
-                "You can't delete that task. Other tasks depend on it.\nDelete the dependent tasks first.",
-                "Sigh. That task has dependent tasks. Delete them first.",
+            "You can't delete that task. Other tasks depend on it.\nDelete the dependent tasks first.",
+            "Sigh. That task has dependent tasks. Delete them first.",
         };
         return getRandomItemFromArray(deleteWithDependentsText);
     }

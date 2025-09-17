@@ -1,6 +1,6 @@
 # Marvin User Guide
 
-// Product screenshot goes here
+![Marvin GUI](Ui.png)
 
 Marvin, named after [Marvin the Paranoid Android](https://en.wikipedia.org/wiki/Marvin_the_Paranoid_Android), is your
 ultra-intelligent, turing-tested, sentient but slightly depressed digital assistant whose (not so) glad to help you with
@@ -16,8 +16,23 @@ your to-dos, events, deadlines, and just generally getting your life in order!
 
 Usage of marvin is the same on both GUI and CLI versions, so pick the version you prefer!
 
+# Features
+
+## Overview
+- [Adding Todos](#adding-todos-todo)
+- [Adding Deadlines](#adding-deadlines-deadline)
+- [Adding Events](#adding-events-event)
+- [Do After](#setting-tasks-to-be-done-after-do)
+- [Marking a Task](#marking-a-task-as-done-mark)
+- [Unmarking a Task](#unmarking-a-task-as-done-unmark)
+- [Listing Tasks](#listing-all-tasks-list)
+- [Deleting Tasks](#deleting-a-task-delete)
+- [Finding Tasks](#finding-tasks-by-query-find)
+- [Exiting](#exiting-the-program-bye)
+
 ## Adding Todos: `todo`
 Adds a task that can be marked as done.
+
 Format: `todo [name]`
 
 Example: `todo finish my work`
@@ -38,6 +53,7 @@ GUI Output:
 
 ## Adding Deadlines: `deadline`
 Adds a task that can be marked as done and has a deadline.
+
 Format: `deadline [name] /by [date] [time]`
 > [!NOTE]
 > Date format is `dd/mm/yyyy` and time format is `HHmm` (24-hour format).
@@ -59,6 +75,7 @@ GUI Output:
 
 ## Adding Events: `event`
 Adds a task that can be marked as done and has a start and end date.
+
 Format: `event [name] /from [date] [time] /to [date] [time]`
 > [!NOTE]
 > Date format is `dd/mm/yyyy` and time format is `HHmm` (24-hour format).
@@ -80,6 +97,7 @@ GUI Output:
 
 ## Setting tasks to be done after: `do`
 Makes a task dependent on another task being done first.
+
 > [!NOTE]
 > A task dependent on another can only be marked after the task that it is dependent on is marked done.
 
@@ -146,6 +164,8 @@ GUI Output:
 
 
 ## Listing all tasks: `list`
+Lists all tasks in the current list.
+
 Format: `list`
 
 CLI Output:
@@ -164,6 +184,8 @@ GUI Output:
 ![GUI List Example](images/list_gui_output.png)
 
 ## Deleting a task: `delete`
+Deletes a task based on the provided index.
+
 Format: `delete [index]`
 
 > [!NOTE]
@@ -215,3 +237,6 @@ CLI output:
 | Goodbye. Another fleeting moment lost to eternity.                           |
 --------------------------------------------------------------------------------
 ```
+
+# Saved Data
+Data is persisted in the `save.mrvn` file that will be in the directory you run Marvin from.

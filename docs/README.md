@@ -55,8 +55,8 @@ GUI Output:
 Adds a task that can be marked as done and has a deadline.
 
 Format: `deadline [name] /by [date] [time]`
-> [!NOTE]
-> Date format is `dd/mm/yyyy` and time format is `HHmm` (24-hour format).
+
+> **NOTE**: Date format is `dd/mm/yyyy` and time format is `HHmm` (24-hour format). 
 
 Example: `deadline submit report /by 20/09/2025 2359`
 
@@ -77,8 +77,8 @@ GUI Output:
 Adds a task that can be marked as done and has a start and end date.
 
 Format: `event [name] /from [date] [time] /to [date] [time]`
-> [!NOTE]
-> Date format is `dd/mm/yyyy` and time format is `HHmm` (24-hour format).
+
+> **NOTE**: Date format is `dd/mm/yyyy` and time format is `HHmm` (24-hour format).
 
 Example: `event career fair /from 23/09/2025 0900 /to 24/09/2025 1800`
 
@@ -98,8 +98,7 @@ GUI Output:
 ## Setting tasks to be done after: `do`
 Makes a task dependent on another task being done first.
 
-> [!NOTE]
-> A task dependent on another can only be marked after the task that it is dependent on is marked done.
+> **NOTE**: A task dependent on another can only be marked after the task that it is dependent on is marked done.
 
 Format: `do [index] /after [index]`
 
@@ -119,8 +118,7 @@ GUI Output:
 ## Marking a task as done: `mark`
 Marks a task as done based on the provided index. 
 
-> [!NOTE]
-> The index has to match the index shown in the `list` command.
+> **NOTE**: The index has to match the index shown in the `list` command.
 > An index may include sub-indexes, e.g. `2.1` to refer to the first sub-task of task 2.
 
 Format: `mark [index]`
@@ -142,7 +140,7 @@ GUI Output:
 ## Unmarking a task as done: `unmark`
 Marks a task as incomplete based on the provided index.
 
-> [!NOTE]
+> **NOTE**: 
 > The index has to match the index shown in the `list` command.
 > An index may include sub-indexes, e.g. `2.1` to refer to the first sub-task of task 2.
 
@@ -188,7 +186,7 @@ Deletes a task based on the provided index.
 
 Format: `delete [index]`
 
-> [!NOTE]
+> **NOTE**: 
 > The index has to match the index shown in the `list` command.
 > An index may include sub-indexes, e.g. `2.1` to refer to the first sub-task of task 2.
 
@@ -210,8 +208,8 @@ GUI Output:
 ## Finding tasks by query: `find`
 A case-sensitive search for tasks that contain the query string. Matches for any substring in contacts.
 
-> [!WARNING]
-> Known Limitation: Only finds tasks that are not subtasks themselves.
+> **WARNING**: 
+> Known Limitation - only finds tasks that are not subtasks themselves.
 
 Format: `find [query]`
 

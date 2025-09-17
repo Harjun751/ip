@@ -210,6 +210,9 @@ GUI Output:
 ## Finding tasks by query: `find`
 A case-sensitive search for tasks that contain the query string. Matches for any substring in contacts.
 
+> [!WARNING]
+> Known Limitation: Only finds tasks that are not subtasks themselves.
+
 Format: `find [query]`
 
 Example: `find work`

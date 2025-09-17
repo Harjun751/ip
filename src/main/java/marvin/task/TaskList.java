@@ -142,14 +142,9 @@ public class TaskList implements Serializable {
             int index;
             try {
                 index = Integer.parseInt(part);
-            } catch (NumberFormatException e) {
-                throw new MarvinException(Personality.getInvalidIndexText());
-            }
-
-            try {
                 task = currentListToSearch.get(index - 1);
-            } catch (IndexOutOfBoundsException e) {
-                throw new ArrayIndexOutOfBoundsException();
+            } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                throw new MarvinException(Personality.getInvalidIndexText());
             }
             currentListToSearch = task.getDependentTasks();
         }

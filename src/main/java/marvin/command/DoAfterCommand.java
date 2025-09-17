@@ -30,11 +30,6 @@ public class DoAfterCommand extends Command {
         // Handle the parent/child dilemma
         try {
             taskList.setTaskToDoAfter(parentLocator, subTaskLocator);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            // Return invalid text if out of bounds
-            return new CommandResult(() -> Ui.printGeneric(Personality.getTaskNotFoundText()),
-                    Personality.getTaskNotFoundText()
-            );
         } catch (MarvinException e) {
             return new CommandResult(() -> Ui.printGeneric(e.getMessage()),
                     e.getMessage()

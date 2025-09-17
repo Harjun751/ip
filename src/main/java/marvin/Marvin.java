@@ -60,13 +60,15 @@ public class Marvin {
      * Generates a response for the user's chat message
      */
     public String getResponse(String input) {
+        Command c;
         try {
-            Command c = Parser.parse(input);
-            CommandResult crs = c.execute(this.tasks);
-            StorageHandler.storeTaskList(this.tasks); // save state
-            return crs.getMessage();
+            c = Parser.parse(input);
         } catch (MarvinException e) {
             return e.getMessage();
         }
+
+        CommandResult crs = c.execute(this.tasks);
+        StorageHandler.storeTaskList(this.tasks); // save state
+        return crs.getMessage();
     }
 }

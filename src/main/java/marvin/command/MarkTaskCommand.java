@@ -31,11 +31,6 @@ public class MarkTaskCommand extends Command {
         // attempt to mark task
         try {
             marked = taskList.markTask(this.locator, this.isDone);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            // Return error text result
-            return new CommandResult(() -> Ui.printGeneric(Personality.getTaskNotFoundText()),
-                Personality.getTaskNotFoundTextColorless()
-            );
         } catch (MarvinException e) {
             // Return error text result
             return new CommandResult(() -> Ui.printGeneric(e.getMessage()),

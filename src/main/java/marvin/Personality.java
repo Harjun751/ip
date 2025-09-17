@@ -172,6 +172,14 @@ public class Personality {
         return String.format(chosenTemplate, oldTaskDescription, taskCount);
     }
 
+    public static String getDeleteWithDependentsText() {
+        String[] deleteWithDependentsText = {
+                "You can't delete that task. Other tasks depend on it.\nDelete the dependent tasks first.",
+                "Sigh. That task has dependent tasks. Delete them first.",
+        };
+        return getRandomItemFromArray(deleteWithDependentsText);
+    }
+
 
     private static <T> T getRandomItemFromArray(T[] arr) {
         return arr[new Random(1).nextInt(arr.length)];

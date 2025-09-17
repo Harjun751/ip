@@ -56,10 +56,16 @@ public class TaskList implements Serializable {
      */
     public String removeTask(String locator) {
         Task task = this.searchForTask(locator);
+        if (!task.getDependentTasks().isEmpty()) {
+            throw new MarvinException(Personality.getDeleteWithDependentsText());
+        }
+
         this.tasks.remove(task);
         task.unlinkParent();
         this.size--;
+
         assert (!this.tasks.contains(task)) : "Item not removed from array!";
+
         return task.toString();
     }
 

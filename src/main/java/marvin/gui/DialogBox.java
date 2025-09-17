@@ -24,7 +24,7 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     /**
-     * Instantiate a dialog box representing a message from a user.
+     * Instantiates a dialog box representing a message from a user.
      *
      * @param text The text content of the message.
      * @param img  The image representing the user.
@@ -44,14 +44,22 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Instantiate a standard user dialog box
+     * Instantiates a standard user dialog box.
+     *
+     * @param s The text content of the message.
+     * @param i The image representing the user.
+     * @return A dialog box representing a message from the user.
      */
     public static DialogBox getUserDialog(String s, Image i) {
         return new DialogBox(s, i);
     }
 
     /**
-     * Instantiate a dialog box for Marvin, flipped so that the contents are left-aligned.
+     * Instantiates a dialog box for Marvin, flipped so that the contents are left-aligned.
+     *
+     * @param s The text content of the message.
+     * @param i The image representing the user.
+     * @return A dialog box representing a message from the user.
      */
     public static DialogBox getMarvinDialog(String s, Image i) {
         var db = new DialogBox(s, i);

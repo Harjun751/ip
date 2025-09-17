@@ -28,7 +28,7 @@ public class Marvin {
     }
 
     /**
-     * The core loop and entrypoint for the Marvin chatbot.
+     * Runs the main loop of Marvin, taking in user input and responding accordingly.
      */
     public void run() {
         Ui.printGreeting(Personality.getGreeting());

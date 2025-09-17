@@ -9,8 +9,8 @@ your to-dos, events, deadlines, and just generally getting your life in order!
 # Quick Start Guide
 1. Ensure you have Java 17 or above installed on your machine.
 2. Download the latest JAR file that you'd like to use
-   - CLI Users: [Here](google.com)
-   - GUI Users: [Here](google.com)
+   - CLI Users: [Here](https://github.com/Harjun751/ip/releases/tag/v0.2)
+   - GUI Users: [Here](https://github.com/Harjun751/ip/releases/tag/v0.2)
 3. Copy the JAR file to your desired directory.
 4. Open a terminal, and run using `java -jar marvin.jar`
 

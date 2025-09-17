@@ -11,7 +11,7 @@ import marvin.task.Todo;
 
 public class DoAfterCommandTest {
     @Test
-    public void doAfterCommand_validCommand_addsSubTask() {
+    public void doAfter_setsSubTask_validLocator() {
         // Arrange
         DoAfterCommand dac = new DoAfterCommand("1", "2");
         TaskList tl = new TaskList();
@@ -29,7 +29,7 @@ public class DoAfterCommandTest {
     }
 
     @Test
-    public void doAfterCommand_validCommand_addsSubSubTask() {
+    public void doAfter_setsSubSubTask_validLocator() {
         // Arrange
         TaskList tl = new TaskList();
         Todo first = new Todo("Do first");
@@ -50,7 +50,7 @@ public class DoAfterCommandTest {
     }
 
     @Test
-    public void doAfterCommand_invalidCommand_preventsCircularDependency() {
+    public void doAfter_doesNothing_ifCircularDependency() {
         // Arrange
         TaskList tl = new TaskList();
         Todo first = new Todo("Do first");

@@ -10,7 +10,7 @@ import marvin.task.Todo;
 
 public class DeleteTaskCommandTest {
     @Test
-    public void deleteTaskCommand_validCommand_deletesTask() {
+    public void deleteTask_deletesTask_withValidLocator() {
         // Arrange
         DeleteTaskCommand dtc = new DeleteTaskCommand("1");
         TaskList tl = new TaskList();
@@ -25,7 +25,7 @@ public class DeleteTaskCommandTest {
     }
 
     @Test
-    public void deleteTaskCommand_invalidCommand_doesNotDeleteTask() {
+    public void deleteTask_doesNothing_withInvalidLocator() {
         // Arrange
         DeleteTaskCommand dtc = new DeleteTaskCommand("2");
         TaskList tl = new TaskList();
@@ -40,7 +40,7 @@ public class DeleteTaskCommandTest {
     }
 
     @Test
-    public void deleteTaskCommand_withSubtasks_deletesSubtask() {
+    public void deleteTask_deletesTask_withValidSubtaskLocator() {
         // Arrange - create subtask
         TaskList tl = new TaskList();
         Todo first = new Todo("first");

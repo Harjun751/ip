@@ -11,7 +11,7 @@ import marvin.task.Todo;
 
 public class MarkTaskCommandTest {
     @Test
-    public void markTaskCommand_validCommand_marksTask() {
+    public void markTask_marksTask_validLocator() {
         // Arrange
         MarkTaskCommand mtc = new MarkTaskCommand("1", true);
         TaskList tl = new TaskList();
@@ -26,7 +26,7 @@ public class MarkTaskCommandTest {
     }
 
     @Test
-    public void markTaskCommand_validCommand_unmarksTask() {
+    public void unmarkTask_unmarksTask_validLocator() {
         // Arrange
         MarkTaskCommand mtc = new MarkTaskCommand("1", false);
         TaskList tl = new TaskList();
@@ -41,7 +41,7 @@ public class MarkTaskCommandTest {
     }
 
     @Test
-    public void markTaskCommand_validSubTaskCommand_marksTask() {
+    public void markTask_marksTask_validSubTaskLocator() {
         // Arrange
         MarkTaskCommand mtc = new MarkTaskCommand("1.1", true);
         TaskList tl = new TaskList();
@@ -58,7 +58,7 @@ public class MarkTaskCommandTest {
     }
 
     @Test
-    public void markTaskCommand_validSubTaskCommand_unmarksTask() {
+    public void unmarkTask_unmarksTask_validSubTaskLocator() {
         // Arrange
         MarkTaskCommand mtc = new MarkTaskCommand("1.1", false);
         TaskList tl = new TaskList();
@@ -75,7 +75,7 @@ public class MarkTaskCommandTest {
     }
 
     @Test
-    public void markTaskCommand_parentNotDone_doesNothing() {
+    public void markTask_doesNothing_ifParentNotDone() {
         // Arrange
         MarkTaskCommand mtc = new MarkTaskCommand("1.1", true);
         TaskList tl = new TaskList();
@@ -93,7 +93,7 @@ public class MarkTaskCommandTest {
     }
 
     @Test
-    public void markTaskCommand_invalidCommand_doesNothing() {
+    public void markTask_doesNothing_invalidLocator() {
         // Arrange
         MarkTaskCommand mtc = new MarkTaskCommand("1.1", false);
         TaskList tl = new TaskList();

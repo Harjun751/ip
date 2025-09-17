@@ -1,6 +1,7 @@
 package marvin.command;
 
 import marvin.MarvinException;
+import marvin.Personality;
 import marvin.task.TaskList;
 import marvin.ui.Color;
 import marvin.ui.Ui;
@@ -30,12 +31,6 @@ public class MarkTaskCommand extends Command {
         // attempt to mark task
         try {
             marked = taskList.markTask(this.locator, this.isDone);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            // Return error text result
-            return new CommandResult(() -> Ui.printGeneric("That task doesn't exist. Just like "
-                    + Color.getColoredTextString("hope", Color.RED) + "."),
-            "That task doesn't exist. Just like hope."
-            );
         } catch (MarvinException e) {
             // Return error text result
             return new CommandResult(() -> Ui.printGeneric(e.getMessage()),
@@ -44,7 +39,7 @@ public class MarkTaskCommand extends Command {
         }
 
         // Return success text
-        String reply = "Fine, done.\n" + marked;
+        String reply = Personality.getGenericCompletedText() + "\n" + marked;
         return new CommandResult(() -> Ui.printGeneric(reply), reply);
     }
 }

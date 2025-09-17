@@ -11,7 +11,7 @@ import marvin.task.Todo;
 
 public class DoAfterCommandTest {
     @Test
-    public void doAfterCommand_validCommand_addsSubTask() {
+    public void doAfter_setsSubTask_validLocator() {
         // Arrange
         DoAfterCommand dac = new DoAfterCommand("1", "2");
         TaskList tl = new TaskList();
@@ -29,7 +29,20 @@ public class DoAfterCommandTest {
     }
 
     @Test
-    public void doAfterCommand_validCommand_addsSubSubTask() {
+    public void doAfter_doesNothing_invalidLocator() {
+        // Arrange
+        DoAfterCommand dac = new DoAfterCommand("1.1.1.3", "2.1.1.1.1.1");
+        TaskList tl = new TaskList();
+
+        // Act
+        dac.execute(tl);
+
+        // Assert
+        assertEquals(0, tl.getCount());
+    }
+
+    @Test
+    public void doAfter_setsSubSubTask_validLocator() {
         // Arrange
         TaskList tl = new TaskList();
         Todo first = new Todo("Do first");
@@ -50,7 +63,7 @@ public class DoAfterCommandTest {
     }
 
     @Test
-    public void doAfterCommand_invalidCommand_preventsCircularDependency() {
+    public void doAfter_doesNothing_ifCircularDependency() {
         // Arrange
         TaskList tl = new TaskList();
         Todo first = new Todo("Do first");
@@ -66,5 +79,26 @@ public class DoAfterCommandTest {
         assertEquals(2, tl.getCount());
         assertTrue(first.getDependentTasks().contains(second));
         assertFalse(second.getDependentTasks().contains(first));
+    }
+
+    @Test
+    public void doAfter_doesNothing_ifTaskAlreadyHasParentDependency() {
+        // Arrange
+        TaskList tl = new TaskList();
+
+        Todo first = new Todo("Do first");
+        Todo second = new Todo("Do after");
+        first.setChildTask(second);
+        tl.addToList(first);
+
+        Todo third = new Todo("Unrelated");
+        tl.addToList(third);
+
+        // Act
+        new DoAfterCommand("2", "1.1").execute(tl);
+
+        // Assert
+        assertTrue(first.getDependentTasks().contains(second));
+        assertTrue(third.getDependentTasks().isEmpty());
     }
 }

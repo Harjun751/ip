@@ -21,11 +21,11 @@ public class AddTaskCommand extends Command {
     @Override
     public CommandResult execute(TaskList taskList) {
         taskList.addToList(this.task);
-        String postamble = "\nYou have " + taskList.getCount() + " task(s) in the list.";
-        return new CommandResult(() -> Ui.printGeneric(Personality.getItemAddedText(task.getDescription())
-                + postamble),
+        return new CommandResult(() -> Ui.printGeneric(
+                        Personality.getItemAddedText(task.getDescription(), taskList.getCount())
+                    ),
                 // use the colorless version for GUI
-                Personality.getItemAddedTextColorless(task.getDescription()) + postamble
+                Personality.getItemAddedTextColorless(task.getDescription(), taskList.getCount())
         );
     }
 }

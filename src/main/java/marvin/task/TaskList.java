@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import marvin.MarvinException;
+import marvin.Personality;
 
 /**
  * Contains the logic for managing the overall task list for Marvin.
@@ -40,7 +41,7 @@ public class TaskList implements Serializable {
 
         Task parent = task.getParentTask();
         if (parent != null && !parent.getIsDone()) {
-            throw new MarvinException("You have to complete the previous task first.");
+            throw new MarvinException(Personality.getPrerequisiteIncompleteText());
         }
         task.setIsDone(isDone);
         assert (searchForTask(locator).getIsDone() == isDone) : "Item not updated to correct isDone status";
@@ -55,10 +56,16 @@ public class TaskList implements Serializable {
      */
     public String removeTask(String locator) {
         Task task = this.searchForTask(locator);
+        if (!task.getDependentTasks().isEmpty()) {
+            throw new MarvinException(Personality.getDeleteWithDependentsText());
+        }
+
         this.tasks.remove(task);
         task.unlinkParent();
         this.size--;
+
         assert (!this.tasks.contains(task)) : "Item not removed from array!";
+
         return task.toString();
     }
 
@@ -135,14 +142,9 @@ public class TaskList implements Serializable {
             int index;
             try {
                 index = Integer.parseInt(part);
-            } catch (NumberFormatException e) {
-                throw new MarvinException("Bad number format");
-            }
-
-            try {
                 task = currentListToSearch.get(index - 1);
-            } catch (IndexOutOfBoundsException e) {
-                throw new ArrayIndexOutOfBoundsException();
+            } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                throw new MarvinException(Personality.getInvalidIndexText());
             }
             currentListToSearch = task.getDependentTasks();
         }

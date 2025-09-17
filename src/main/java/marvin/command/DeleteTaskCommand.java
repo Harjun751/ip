@@ -1,5 +1,6 @@
 package marvin.command;
 
+import marvin.MarvinException;
 import marvin.Personality;
 import marvin.task.TaskList;
 import marvin.ui.Color;
@@ -26,11 +27,8 @@ public class DeleteTaskCommand extends Command {
         String oldTask;
         try {
             oldTask = taskList.removeTask(locator);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            // Return invalid text if out of bounds
-            return new CommandResult(() -> Ui.printGeneric(Personality.getTaskNotFoundText()),
-                    Personality.getTaskNotFoundTextColorless()
-            );
+        } catch (MarvinException e) {
+            return new CommandResult(() -> Ui.printGeneric(e.getMessage()), e.getMessage());
         }
 
         // Return the removed text

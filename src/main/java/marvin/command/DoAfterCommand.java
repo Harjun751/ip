@@ -1,6 +1,7 @@
 package marvin.command;
 
 import marvin.MarvinException;
+import marvin.Personality;
 import marvin.task.TaskList;
 import marvin.ui.Color;
 import marvin.ui.Ui;
@@ -31,9 +32,8 @@ public class DoAfterCommand extends Command {
             taskList.setTaskToDoAfter(parentLocator, subTaskLocator);
         } catch (ArrayIndexOutOfBoundsException e) {
             // Return invalid text if out of bounds
-            return new CommandResult(() -> Ui.printGeneric("That task doesn't exist. Just like "
-                    + Color.getColoredTextString("hope", Color.RED) + "."),
-                    "That task doesn't exist. Just like hope."
+            return new CommandResult(() -> Ui.printGeneric(Personality.getTaskNotFoundText()),
+                    Personality.getTaskNotFoundText()
             );
         } catch (MarvinException e) {
             return new CommandResult(() -> Ui.printGeneric(e.getMessage()),
@@ -41,7 +41,7 @@ public class DoAfterCommand extends Command {
             );
         }
 
-        String reply = "done lol";
+        String reply = Personality.getGenericCompletedText();
         return new CommandResult(() -> Ui.printGeneric(reply), reply);
     }
 }

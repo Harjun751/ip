@@ -3,7 +3,6 @@ package marvin.command;
 import marvin.MarvinException;
 import marvin.Personality;
 import marvin.task.TaskList;
-import marvin.ui.Color;
 import marvin.ui.Ui;
 
 /**

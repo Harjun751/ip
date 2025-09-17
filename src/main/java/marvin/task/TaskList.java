@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import marvin.MarvinException;
+import marvin.Personality;
 
 /**
  * Contains the logic for managing the overall task list for Marvin.
@@ -40,7 +41,7 @@ public class TaskList implements Serializable {
 
         Task parent = task.getParentTask();
         if (parent != null && !parent.getIsDone()) {
-            throw new MarvinException("You have to complete the previous task first.");
+            throw new MarvinException(Personality.getPrerequisiteIncompleteText());
         }
         task.setIsDone(isDone);
         assert (searchForTask(locator).getIsDone() == isDone) : "Item not updated to correct isDone status";
@@ -136,7 +137,7 @@ public class TaskList implements Serializable {
             try {
                 index = Integer.parseInt(part);
             } catch (NumberFormatException e) {
-                throw new MarvinException("Bad number format");
+                throw new MarvinException(Personality.getInvalidIndexText());
             }
 
             try {

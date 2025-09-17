@@ -1,5 +1,6 @@
 package marvin.command;
 
+import marvin.Personality;
 import marvin.task.TaskList;
 import marvin.ui.Color;
 import marvin.ui.Ui;
@@ -27,15 +28,13 @@ public class DeleteTaskCommand extends Command {
             oldTask = taskList.removeTask(locator);
         } catch (ArrayIndexOutOfBoundsException e) {
             // Return invalid text if out of bounds
-            return new CommandResult(() -> Ui.printGeneric("That task doesn't exist. Just like "
-                            + Color.getColoredTextString("hope", Color.RED) + "."),
-                    "That task doesn't exist. Just like hope."
+            return new CommandResult(() -> Ui.printGeneric(Personality.getTaskNotFoundText()),
+                    Personality.getTaskNotFoundTextColorless()
             );
         }
 
         // Return the removed text
-        String reply = "I've removed the task.\n" + oldTask + "\nNow you have " + taskList.getCount()
-                + " tasks and absolutely nothing will change.";
+        String reply = Personality.getTaskRemovedText(oldTask, taskList.getCount());
         return new CommandResult(() -> Ui.printGeneric(reply), reply);
     }
 }

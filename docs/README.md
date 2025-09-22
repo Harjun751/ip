@@ -91,7 +91,6 @@ CLI Output:
 ---User replies -----------------------------------------------------------------
 ↳
 ```
-## 
 GUI Output:
 ![GUI Event Example](images/event_gui_output.png)
 
@@ -111,7 +110,6 @@ CLI Output:
 ---User replies -----------------------------------------------------------------
 ↳
 ```
-## 
 GUI Output:
 ![GUI Do After Example](images/doafter_gui_output.png)
 
@@ -133,7 +131,6 @@ CLI Output:
 ---User replies -----------------------------------------------------------------
 ↳
 ```
-## 
 GUI Output:
 ![GUI Mark Example](images/mark_gui_output.png)
 
@@ -156,7 +153,6 @@ CLI Output:
 ---User replies -----------------------------------------------------------------
 ↳
 ```
-## 
 GUI Output:
 ![GUI Mark Example](images/mark_gui_output.png)
 
